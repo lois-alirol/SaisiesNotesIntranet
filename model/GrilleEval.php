@@ -10,7 +10,7 @@ class GrilleEval {
     }
 
     //METHODE QUI PERMET D'OBTENIR UN ARRAY DES CRITERES D'EVALUATION
-    public function getTableauGrilleEval($idGrille, $idEval, $typeEnseignant, $cours){
+    public function getTableauGrilleEval($idEval, $typeEnseignant, $cours){
         $req = "";   
         switch ($cours){
             case "PORTFOLIO":
@@ -80,9 +80,37 @@ class GrilleEval {
         return $stmt->fetch();
     }
 
-    public function getFeedback($idGrille){
-         $stmt = $this->pdo->prepare("SELECT commentaireJur");
+    public function getFeedback($idEval, $typeEnseignant, $cours){
+        $req = "";   
+        switch ($cours){
+            case "PORTFOLIO":
+                $req = "SELECT evalportfolio.commentaireJury FROM evalportfolio WHERE evalportfolio.IdEvalPortfolio = :idEval";
+                break;
+            case "RAPPORT":
+                $req = "SELECT evalrapport.commentaireJury FROM evalrapport WHERE evalrapport.IdEvalRapport = :idEval";
+                break;
+            case "ANGLAIS":
+                $req = "SELECT evalanglais.commentaireJury FROM evalanglais WHERE evalanglais.IdEvalAnglais = :idEval";
+                break;
+            case "SOUTENANCE":
+                switch ($typeEnseignant){
+                    case "ENSSECOND":
+                        $req = "SELECT evalsoutenanceenssecond.commentaireJury FROM evalsoutenanceenssecond WHERE evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
+                        break;
+                    case "ENSTUTEUR":
+                        $req = "SELECT evalsoutenanceenstuteur.commentaireJury FROM evalsoutenanceenstuteur WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
+                        break;
+                }
+                break;
+        }
+
+        $stmt = $this->pdo->prepare($req);
+        $stmt->bindParam(":idEval", $idEval);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
     }
+
 }
 
 ?>  
