@@ -40,14 +40,6 @@
         </table>
     </div>
 
-    <label for="">Évaluateur attribué</label>
-    <select name="" id="">
-        <option>ezfekoizekfzioekfoizefk</option>
-        <option>ezfekoizekfzioekfoizefk</option>
-        <option>ezfekoizekfzioekfoizefk</option>
-        <option>ezfekoizekfzioekfoizefk</option>
-    </select>
-
     <label for="">Note calculée</label>
     <label for="" class>0.0 / 0.0</label>
 

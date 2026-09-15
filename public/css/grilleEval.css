@@ -58,15 +58,6 @@ button{
   font-weight: 500;
 }
 
-select {
-    font-family: Barlow-Regular, sans-serif;
-    font-size: 16px;
-    color: black;
-    border: 1px solid #6D6D6C;
-    border-radius: 8px;
-    padding: 8px 8px;
-}
-
 .save-bar{
   width: 100%;
   border-top: 1px solid #506168;

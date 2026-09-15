@@ -72,9 +72,14 @@ class GrilleEval {
     }
 
     //METHODE QUI PERMET D'OBTENIR LES INFORMATIONS SUR LA GRILLE D'EVALUATION EN QUESTION
-    public function getModeleGrilleEval($idGrille){
-        $stmt = $this->pdo->prepare("SELECT * FROM modelesgrilleeval WHERE IdModeleEval = :idGrille");
-        $stmt->bindParam(":idGrille", $idGrille);
+    public function getModeleGrilleEval($idEval){
+        $stmt = $this->pdo->prepare(
+            "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
+            FROM evalportfolio
+            JOIN modelesgrilleeval
+            ON modelesgrilleeval.IdModeleEval = evalportfolio.IdModeleEval
+            WHERE evalportfolio.IdEvalPortfolio = :idEval");
+        $stmt->bindParam(":idEval", $idEval);
         $stmt->execute();
         
         return $stmt->fetch();
