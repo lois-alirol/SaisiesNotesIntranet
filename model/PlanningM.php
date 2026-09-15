@@ -7,7 +7,7 @@ class planning
     {
         $this->pdo = $pdo;
     }
-
+    
     //Requete du planning
     public function getPlanningEnseignants($idEnseignant)
     { //idEbseignants pas encore pris en compte
@@ -72,7 +72,7 @@ class planning
     WHERE ea.anneeDebut = YEAR(CURDATE()) - 1
     AND (e1.IdEnseignant = :idEns)
     ORDER BY ea.dateS, ea.IdSalle;";
-    
+
         try 
         {
             $stmt = $this->pdo->prepare($sql);
