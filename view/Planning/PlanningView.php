@@ -2,46 +2,59 @@
 
 $dates = array_unique(array_column($plannings, 'date'));
 sort($dates);
+
+$datesAnglais = array_unique(array_column($planningsAnglais, 'date'));
+sort($datesAnglais);
+
+sort($salles);
 ?>
 
 <link rel="stylesheet" href="/public/css/planning.css">
 
+<!--Dropdown pour selection la date a afficher-->
 <label for="dateSlct">Date :</label>
 <select name="dateSlct" id="dateSlct">
-    <option value=null>Toutes</option>
-    <?php foreach ($dates as $date) : ?>
-        <option value=$date><?= htmlspecialchars($date) ?></option>
-    <?php endforeach ?>
+    <option value="">Toutes</option>
+    <?php foreach ($dates as $date): ?>
+        <option value="<?= htmlspecialchars($date) ?>"> 
+            <?= htmlspecialchars($date) ?>
+        </option>
+    <?php endforeach; ?>
+    <?php foreach ($datesAnglais as $date): ?>
+        <option value="<?= htmlspecialchars($date) ?>">
+            <?= htmlspecialchars($date) ?>
+        </option>
+    <?php endforeach; ?>
 </select>
 
-<!--Check box pour witch entre planning anglais et général-->
-<input type="checkbox" id="PlanningG-A"/>
-<label for="PlanningG-A" id="texte">Planning général/Anglais</label>
+<!--Check Box pour afficher ou non le planning d'anglais-->
+<input type="checkbox" id="anglaisToggle" />
+<label for="anglaisToggle" id="texte">Planning Anglais</label>
 
-<h2>Planning</h2>
+<!--Planning pour les Soutenances-->
+<div id="planning-general">
+
+<h2>Planning Soutenance</h2>
 
 <?php foreach ($dates as $curdate): ?>
 
     <?php
-    $salles = [];
     $heures = [];
 
     foreach ($plannings as $planning) {
         if ($planning['date'] === $curdate) {
-            $salles[] = $planning['salle'];
             $heures[] = $planning['heure'];
         }
     }
 
-    $salles = array_unique($salles);
     $heures = array_unique($heures);
 
-    sort($salles);
+
     sort($heures);
 
     ?>
 
-    <table class="planning">
+    <table class="planning" data-date="<?= htmlspecialchars($curdate) ?>">
         <thead>
             <tr class="planning-date">
                 <th colspan="<?= count($salles) + 1 ?>">
@@ -104,90 +117,136 @@ sort($dates);
 
 <?php endforeach ?>
 
+</div>
 
-<!--Affiche le planning pour les evals d'Anglais-->
 
+<!--Planning pour les evals d'Anglais-->
+<div id="planning-anglais">
+<?php if (!empty($planningsAnglais)): ?>
 
-<?php if(!empty($planningsAnglais)): ?>
-
-<h2>Planning Anglais</h2>
-<?php
-
-$dates = array_unique(array_column($planningsAnglais, 'date'));
-sort($dates);
-
-foreach ($dates as $curdate):
-?>
-
+    <h2>Planning Anglais</h2>
     <?php
-    $salles = [];
-    $heures = [];
 
-    foreach ($planningsAnglais as $planning) {
-        if ($planning['date'] === $curdate) {
-            $salles[] = $planning['salle'];
-            $heures[] = $planning['heure'];
-        }
-    }
 
-    $salles = array_unique($salles);
-    $heures = array_unique($heures);
 
-    sort($salles);
-    sort($heures);
+    foreach ($datesAnglais as $curdate):
     ?>
 
-    <table class="planning">
-        <thead>
-            <tr class="planning-date">
-                <th colspan="<?= count($salles) + 1 ?>">
-                    <?php if (!empty($planningsAnglais)): ?>
-                        <?= date('d/m/Y', strtotime($curdate)) ?>
-                    <?php endif; ?>
-                </th>
-            </tr>
-            <tr class="planning-header">
-                <th class="colonne-heure">
-                    Heures de passage
-                </th>
-                <?php foreach ($salles as $salle): ?>
-                    <th>
-                        <?= htmlspecialchars($salle) ?>
-                    </th>
-                <?php endforeach; ?>
-            </tr>
-        </thead>
+        <?php
+        $heures = [];
 
-        <tbody>
-            <?php foreach ($heures as $heure): ?> 
-                <tr>
-                    <td class="heure">
-                        <?= date('H:i', strtotime($heure)) ?>
-                    </td>
+        foreach ($planningsAnglais as $planning) {
+            if ($planning['date'] === $curdate) {
+                $heures[] = $planning['heure'];
+            }
+        }
+
+        $heures = array_unique($heures);
+
+        sort($heures);
+        ?>
+
+        <table class="planning" data-date="<?= htmlspecialchars($curdate) ?>">
+            <thead>
+                <tr class="planning-date">
+                    <th colspan="<?= count($salles) + 1 ?>">
+                        <?php if (!empty($planningsAnglais)): ?>
+                            <?= date('d/m/Y', strtotime($curdate)) ?>
+                        <?php endif; ?>
+                    </th>
+                </tr>
+                <tr class="planning-header">
+                    <th class="colonne-heure">
+                        Heures de passage
+                    </th>
                     <?php foreach ($salles as $salle): ?>
-                        <td class="planning-cell">
-                            <?php foreach ($planningsAnglais as $planning): ?>
-                                <?php if (
-                                    $planning['heure'] === $heure &&
-                                    $planning['salle'] === $salle &&
-                                    $planning['date'] === $curdate
-                                ): ?>
-                                    <div class="passage">
-                                        <strong>
-                                            <?= htmlspecialchars($planning['eleve']) ?>
-                                        </strong>
-                                        <br>
-                                        <?= htmlspecialchars($planning['professeur_1']) ?>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </td>
+                        <th>
+                            <?= htmlspecialchars($salle) ?>
+                        </th>
                     <?php endforeach; ?>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-<?php endforeach ?>
-    <?php else: 
-            return;
-    endif; ?>
+            </thead>
+
+            <tbody>
+                <?php foreach ($heures as $heure): ?>
+                    <tr>
+                        <td class="heure">
+                            <?= date('H:i', strtotime($heure)) ?>
+                        </td>
+                        <?php foreach ($salles as $salle): ?>
+                            <td class="planning-cell">
+                                <?php foreach ($planningsAnglais as $planning): ?>
+                                    <?php if (
+                                        $planning['heure'] === $heure &&
+                                        $planning['salle'] === $salle &&
+                                        $planning['date'] === $curdate
+                                    ): ?>
+                                        <div class="passage">
+                                            <strong>
+                                                <?= htmlspecialchars($planning['eleve']) ?>
+                                            </strong>
+                                            <br>
+                                            <?= htmlspecialchars($planning['professeur_1']) ?>
+                                        </div>
+                                    <?php endif; ?>
+                                <?php endforeach; ?>
+                            </td>
+                        <?php endforeach; ?>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    <?php endforeach ?>
+<?php else:
+    return;
+endif; ?>
+
+</div>
+
+<script>
+    const selectDate = document.getElementById('dateSlct');
+    const anglaisToggle = document.getElementById('anglaisToggle');
+    const divGeneral = document.getElementById('planning-general');
+    const divAnglais = document.getElementById('planning-anglais');
+    divAnglais.style.display = "none";
+
+    selectDate.addEventListener('change', function() {
+        const dateSelectionnee = this.value;
+
+        console.log(dateSelectionnee);
+    });
+
+    const plannings = document.querySelectorAll('.planning');
+
+    selectDate.addEventListener('change', function() {
+        const dateSelectionnee = this.value;
+
+        plannings.forEach(function(planning) {
+            const datePlanning = planning.dataset.date;
+
+            if (dateSelectionnee === "" || datePlanning === dateSelectionnee)
+            {
+                planning.style.display = "";
+            } 
+            else 
+            {
+                planning.style.display = "none";
+            }
+        });
+    });
+
+    anglaisToggle.addEventListener('change', function() {
+
+        if (this.checked) 
+        {
+            divGeneral.style.display = "none";
+            divAnglais.style.display = "";
+        } 
+        else
+        {
+            divGeneral.style.display = "";
+            divAnglais.style.display = "none";
+        }
+    });
+
+</script>

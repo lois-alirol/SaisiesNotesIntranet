@@ -15,6 +15,7 @@ private $PlanningModel;
         $idEnseignant = EnseignantSession::getData()["id"];
         $plannings = $this->PlanningModel->getPlanningEnseignants($idEnseignant);
         $planningsAnglais = $this->PlanningModel->getPlanningEnseignantsAnglais($idEnseignant);
+        $salles = $this->PlanningModel->getSalles();
 
         include 'view/layout/header.php';
         include 'view/planning/PlanningView.php';
