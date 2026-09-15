@@ -12,7 +12,7 @@ class AuthController {
         $this->enseignantModel = new Enseignant($pdo);
     }
 
-    public function handle() {
+    public function handle(): void {
         $method = $_SERVER["REQUEST_METHOD"];
 
         if (EnseignantSession::isAuthenticated()) {
@@ -31,7 +31,7 @@ class AuthController {
         }
     }
 
-    public function login($data) {
+    public function login($data): void {
         $email = $data["email"];
         $password = $data["password"];
 
@@ -49,6 +49,8 @@ class AuthController {
             return;
         }
 
+        session_regenerate_id(true);
+
         $_SESSION["id"] = $teacher["IdEnseignant"];
         $_SESSION["nom"] = $teacher["nom"];
         $_SESSION["prenom"] = $teacher["prenom"];
@@ -57,7 +59,7 @@ class AuthController {
         header("Location: /");
     }
 
-    public function logout() {
+    public function logout(): void {
         session_unset();
         session_destroy();
 

@@ -9,6 +9,10 @@ class EnseignantSession {
     }
 
     public static function getData(): array {
+        if (!EnseignantSession::isAuthenticated()) {
+            return [];
+        }
+
         return [
             "id" => $_SESSION["id"],
             "nom" => $_SESSION["nom"],

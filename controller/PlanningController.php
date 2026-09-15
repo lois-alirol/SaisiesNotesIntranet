@@ -19,5 +19,5 @@ private $PlanningModel;
         include 'view/layout/header.php';
         include 'view/planning/PlanningView.php';
     }
-
+    
 }

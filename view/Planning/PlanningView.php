@@ -96,8 +96,9 @@ sort($dates);
 <!--Affiche le planning pour les evals d'Anglais-->
 
 
-<h2>Planning Anglais</h2>
+<?php if(!empty($planningsAnglais)): ?>
 
+<h2>Planning Anglais</h2>
 <?php
 
 $dates = array_unique(array_column($planningsAnglais, 'date'));
@@ -175,3 +176,6 @@ foreach ($dates as $curdate):
         </tbody>
     </table>
 <?php endforeach ?>
+    <?php else: 
+            return;
+    endif; ?>
