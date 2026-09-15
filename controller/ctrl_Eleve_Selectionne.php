@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/model/mdl_Eleve_Selectionne.php';
+//require_once __DIR__ . '/model/mdl_Eleve_Selectionne.php';
 //require_once __DIR__ . '/view/HistoriqueEleveSelect/view_Eleve_Selectionne.php';
 
 class HistoriqueEleveSelectController {
