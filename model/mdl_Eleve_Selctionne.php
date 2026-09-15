@@ -4,7 +4,7 @@ function getInfosTutor($idEtudiant, $idUser) {
     $sql = "SELECT e.IdEtudiant, e.nom, e.prenom, a.sujet, ent.nom As entreprise, es.date_h, es.noteStage AS noteStage, 
             es.noteTuteur AS noteTut, es.noteSoutenance AS noteSout, es.noteRapport AS noteRap, es.noteSoutenanceEnseignant1 AS noteEns1, 
             es.noteSoutenanceEnseignant2 AS noteEns2, es.commentaireJury AS commjury, es.presenceMaitreStageApp AS MSpres, es.confidentiel, 
-            es.IdSalle AS salleNom, a.nomMaitreStageApp AS nomMaitreStage,
+            es.IdSalle AS salleNom, es.Statut AS estat, a.nomMaitreStageApp AS nomMaitreStage, a.anneeDebut AS anneeDebut, 
             s.description AS salle, er.note AS ernote, er.commentaireJury AS ercomm, er.Statut AS erstat, er.anneeDebut AS eryr,
             ep.note AS epnote, ep.commentaireJury AS epcomm, ep.Statut AS epstat, ep.anneeDebut AS epyr
             FROM EtudiantsBUT2ou3 e
