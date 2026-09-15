@@ -18,4 +18,13 @@ private $PlanningModel;
         include 'view/layout/header.php';
         include 'view/planning/PlanningView.php';
     }
+
+    public function PlanningAnglais()
+    {
+        $idEnseignant = $_GET['enseignant'];
+        $planningsAnglais = $this->PlanningModel->getPlanningEnseignantsAnglais($idEnseignant);
+
+        include 'view/layout/header.php';
+        include 'view/planning/PlanningView.php';
+    }
 }
