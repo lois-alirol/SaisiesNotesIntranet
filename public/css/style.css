@@ -1,39 +1,299 @@
 @font-face {
-    font-family: Barlow-Regular;
-    src: url("../fonts/Barlow-Regular.woff2");
+    font-family: "Barlow-Regular";
+    src: url("../fonts/Barlow-Regular.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: Barlow-Italic;
-    src: url("../fonts/Barlow-Italic.woff2");
+    font-family: "Barlow-Italic";
+    src: url("../fonts/Barlow-Italic.woff2") format("woff2");
 }
 
 @font-face {
-    font-family: Barlow-Bold;
-    src: url("../fonts/Barlow-Bold.woff2");
+    font-family: "Barlow-Bold";
+    src: url("../fonts/Barlow-Bold.woff2") format("woff2");
 }
 
+* {
+    box-sizing: border-box;
+}
 
-h1 {
-    color: white;
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Barlow-Regular", sans-serif;
 }
 
 header {
-    display: flex;
-    padding: 1px;
-    text-align: left;
-    background-color: #2E6B80;
     width: 100%;
-    color: white;
-    font-family: Barlow-Bold;
-    font-size: 16px;
-    flex-direction: row;
+    height: 60px;
+
+    display: flex;
     align-items: center;
+
+    background-color: #08788b;
+    color: white;
+
+    padding: 0 20px;
+
+    font-family: "Barlow-Regular", sans-serif;
 }
 
-header .uca-logo{
-    padding: 10px;
-    margin-right: auto;
-    height: 75px;
+header .uca-logo {
     width: auto;
+    height: 48px;
+
+    padding: 0;
+    margin: 0 25px 0 0;
+
+    object-fit: contain;
+}
+
+
+header h3 {
+    margin: 0 30px 0 0;
+
+    color: white;
+
+    font-family: "Barlow-Bold", sans-serif;
+    font-size: 16px;
+    font-weight: normal;
+
+    white-space: nowrap;
+}
+
+.navbar {
+    position: static;
+
+    width: auto;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    background: transparent;
+    box-shadow: none;
+    opacity: 1;
+
+    color: white;
+}
+
+.navbar-container {
+    width: auto;
+    max-width: none;
+
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.menu-items {
+    order: 1;
+
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+}
+
+.menu-items li {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    margin: 0;
+    padding: 0;
+}
+
+.navbar a {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    color: white;
+
+    text-decoration: none;
+
+    font-family: "Barlow-Regular", sans-serif;
+    font-size: 15px;
+    font-weight: normal;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* Hover */
+
+.navbar a:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.12);
+}
+
+.logo {
+    display: none;
+}
+
+.navbar input[type="checkbox"],
+.navbar .hamburger-lines {
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    header {
+        height: 60px;
+        padding: 0 15px;
+    }
+
+    header .uca-logo {
+        height: 42px;
+        margin-right: auto;
+    }
+
+    header h3 {
+        display: none;
+    }
+
+    .navbar {
+        height: 60px;
+    }
+
+    .navbar-container {
+        position: relative;
+
+        width: 40px;
+        height: 60px;
+    }
+
+    .navbar-container input[type="checkbox"] {
+        position: absolute;
+
+        display: block;
+
+        width: 35px;
+        height: 35px;
+
+        top: 12px;
+        right: 0;
+
+        margin: 0;
+
+        opacity: 0;
+
+        cursor: pointer;
+
+        z-index: 5;
+    }
+
+    .navbar-container .hamburger-lines {
+        position: absolute;
+
+        display: flex;
+
+        width: 28px;
+        height: 22px;
+
+        top: 19px;
+        right: 0;
+
+        flex-direction: column;
+        justify-content: space-between;
+
+        z-index: 2;
+    }
+
+    .hamburger-lines .line {
+        display: block;
+
+        width: 100%;
+        height: 3px;
+
+        border-radius: 5px;
+
+        background: white;
+    }
+
+
+    .navbar .menu-items {
+        position: fixed;
+
+        top: 60px;
+        right: 0;
+
+        width: 260px;
+        height: calc(100vh - 60px);
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        margin: 0;
+        padding: 15px 0;
+
+        background-color: #08788b;
+
+        transform: translateX(100%);
+
+        transition: transform 0.3s ease;
+
+        box-shadow: -4px 0 10px rgba(0, 0, 0, 0.2);
+
+        z-index: 100;
+    }
+
+    .navbar .menu-items li {
+        width: 100%;
+        height: auto;
+    }
+
+    .navbar .menu-items a {
+        width: 100%;
+        height: auto;
+
+        padding: 15px 25px;
+
+        font-size: 17px;
+    }
+
+    .navbar-container input[type="checkbox"]:checked ~ .menu-items {
+        transform: translateX(0);
+    }
+
+    .navbar-container input[type="checkbox"]:checked
+    ~ .hamburger-lines .line1 {
+        transform: rotate(45deg) translate(5px, 8px);
+    }
+
+    .navbar-container input[type="checkbox"]:checked
+    ~ .hamburger-lines .line2 {
+        opacity: 0;
+    }
+
+    .navbar-container input[type="checkbox"]:checked
+    ~ .hamburger-lines .line3 {
+        transform: rotate(-45deg) translate(5px, -8px);
+    }
+
+    .hamburger-lines .line {
+        transition: all 0.25s ease;
+    }
 }

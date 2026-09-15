@@ -204,9 +204,7 @@ sort($salles);
 </div>
 
 
-<script>
-
-    
+<script>    
     const selectDate = document.getElementById('dateSlct');
 
     selectDate.addEventListener('change', function() {
