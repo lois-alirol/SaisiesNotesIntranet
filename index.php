@@ -7,12 +7,14 @@ require_once 'controller/ctrl_Eleve_Selectionne.php';
 
 // Si l'application gère une session d'authentification, on pourrait préférer $_SESSION.
 // Ici on supporte GET pour tester facilement depuis l'URL.
-$idUser     = isset($_GET['idUser']) ? (int)$_GET['idUser'] : null;
-$idEtudiant = isset($_GET['idEtudiant']) ? (int)$_GET['idEtudiant'] : null;
+//$idUser     = isset($_GET['idUser']) ? (int)$_GET['idUser'] : null;
+//$idEtudiant = isset($_GET['idEtudiant']) ? (int)$_GET['idEtudiant'] : null;
 
+$idUser = null; 
+$idEtudiant = null;
 // Valeurs de test par défaut (à adapter si besoin)
 $DEFAULT_USER_ID     = 1; // faux enseignant / secrétaire
-$DEFAULT_ETUDIANT_ID = 5; // faux étudiant
+$DEFAULT_ETUDIANT_ID = 2; // faux étudiant
 
 // Utilise les valeurs par défaut si les paramètres manquent
 if (!$idUser) {
