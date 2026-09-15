@@ -3,7 +3,7 @@
 // A CHANGER POUR SE CONNECTER A VOTRE DB
 $host = "localhost";
 $port = "3306";
-$dbName = "tests";
+$dbName = "evaluationstages";
 $username = "root";
 $password = "";
 

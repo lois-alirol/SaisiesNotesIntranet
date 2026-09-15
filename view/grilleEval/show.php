@@ -26,14 +26,6 @@
 <?php endforeach; ?>
 </table>
 
-<label for="statusEvaluation">Statut du flux d'évaluation</label>
-<select name="statusEvaluation" id="statusEvaluation">
-  <option value="published">Saisi</option>
-  <option value="published">Validé</option>
-  <option value="published">Bloqué</option>
-  <option value="published">Diffusé</option>
-</select> 
-
 <br> <!-- JE METTRAIS EN DISPLAY FLEX APRES -->
 
 <label for="">Évaluateur attribué</label>
@@ -41,10 +33,6 @@
 </select>
 
 <br> <!-- JE METTRAIS EN DISPLAY FLEX APRES -->
-
-<label for="note">Note actuelle dans le carnet de notes</label>
-<br>
-<label name="note">0.0</label>
 
 <script>
     <?php foreach ($critereseval as $c): ?>
@@ -61,7 +49,7 @@
 </script>
 
 <div>
-    <textarea><?=$feedback?></textarea>
+    <textarea><?=$feedback["commentaireJury"]?></textarea>
 </div>
 
 <div>
