@@ -13,6 +13,7 @@ class GrilleEvalController {
         //$critereseval = $this->grilleEvalModel->getAll();
         $critereseval = $this->grilleEvalModel->getTableauGrilleEval($idGrille, $idEval, $typeEnseignant, $cours);
         $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idGrille);
+        $feedback = $this->grilleEvalModel->getFeedback($idGrille);
 
         include 'view/grilleEval/show.php';
     }
