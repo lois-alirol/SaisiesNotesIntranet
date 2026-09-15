@@ -86,3 +86,9 @@
     font-weight: bold;
     font-style: italic;
 }
+
+h2 {
+    font-family: Barlow-Regular, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+}
