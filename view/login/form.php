@@ -7,6 +7,7 @@
     </head>
     <body>
         <div class="login-container">
+            <img src="/public/images/uca-logo.png" width="256px" class="uca-logo" alt="UCA Logo">
             <?php if (isset($error)): ?>
                 <p class="error">
                     <?= $error ?>
