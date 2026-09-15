@@ -11,22 +11,29 @@ $authController = new AuthController($pdo);
 $grilleEvalController = new GrilleEvalController();
 $planningController = new planningController();
 
-$url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
-switch ($url) {
-    case "/login": {
-        $authController->handle();
-        break;
-    }
-    case "/logout": {
-        $authController->logout();
-        break;
-    }
-    case "/grille": {
-        $grilleEvalController->show();
-        break;
-    }
-    case "/planning": {
-        $planningController->Planning();
-        break;
-    }
-}
+$grilleEvalController->show(1, 2, "ENSTUTEUR", "PORTFOLIO");
+
+// //SI IL N'Y A PAS D'ACTION, ON AFFICHE LA LISTE
+// $action = $_GET['action'] ?? 'list';
+
+// //SWITCH DES ACTIONS, PAR DEFAUT AFFICHE LA LISTE
+// switch ($action) {
+//     case 'list':
+//         $controller->list();
+//         break;
+//     case 'add':
+//         $controller->add();
+//         break;
+//     case 'delete':
+//         $controller->delete($_GET['id']);
+//         break;
+//     case 'recoltes':
+//         $controller->showRecoltes($_GET['id']);
+//         break;
+//     case 'addrecoltes':
+//         $controller->addRecoltes($_GET['culture_id'], $_GET['dateRecolte'], $_GET['quantite']);
+//         break;
+//     default:
+//         echo "Action inconnue.";
+// }
+// ?>

@@ -3,9 +3,9 @@
 // A CHANGER POUR SE CONNECTER A VOTRE DB
 $host = "localhost";
 $port = "3306";
-$dbName = "tests";
-$username = "iut";
-$password = "123456";
+$dbName = "evaluationstages";
+$username = "root";
+$password = "";
 
 try {
     $pdo = new PDO(
