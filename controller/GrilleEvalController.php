@@ -9,8 +9,11 @@ class GrilleEvalController {
         $this->grilleEvalModel = new GrilleEval($pdo);
     }
 
-    public function show() {
-        $critereseval = $this->grilleEvalModel->getAll();
+    public function show($idGrille, $idEval, $typeEnseignant, $cours) {
+        //$critereseval = $this->grilleEvalModel->getAll();
+        $critereseval = $this->grilleEvalModel->getTableauGrilleEval($idGrille, $idEval, $typeEnseignant, $cours);
+        $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idGrille);
+
         include 'view/grilleEval/show.php';
     }
 }
