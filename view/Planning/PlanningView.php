@@ -6,6 +6,10 @@ sort($dates);
 
 <link rel="stylesheet" href="/public/css/planning.css">
 
+<!--Check box pour witch entre planning anglais et général-->
+<input type="checkbox" id="PlanningG-A"/>
+<label for="PlanningG-A" id="texte">Planning général/Anglais</label>
+
 <h2>Planning</h2>
 
 <?php foreach ($dates as $curdate): ?>

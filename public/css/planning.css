@@ -92,3 +92,7 @@ h2 {
     text-align: center;
     margin-top: 100px;
 }
+
+#PlanningG-A, #texte {
+   font-family: Barlow-Regular, sans-serif;
+}
