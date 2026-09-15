@@ -91,8 +91,9 @@ sort($dates);
 </table>
 
 <?php endforeach?>
-<!--Affiche le planning pour les evals d'Anglais-->
 
+<!--Affiche le planning pour les evals d'Anglais-->
+<?php if(!empty($planningsAnglais)): ?>
 <h2>Planning Anglais</h2>
 <table>
     <thead>
@@ -118,3 +119,6 @@ sort($dates);
     <?php endforeach; ?>
     </tbody>
 </table>
+    <?php else: 
+            return;
+    endif; ?>
