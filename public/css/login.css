@@ -1,0 +1,71 @@
+body {
+    display: flex;
+    height: 100vh;
+    text-align: center;
+    background-color: #2E6B80
+}
+
+.form-title {
+    font-family: Barlow-Regular, sans-serif;
+    color: #6D6D6C;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    margin: auto;
+    border-radius: 16px;
+    padding: 80px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.login-form label {
+    font-family: Barlow-Regular, sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;
+    color: #A9A9A9;
+}
+
+.login-form input {
+    font-family: Barlow-Regular, sans-serif;
+    font-size: 16px;
+    color: black;
+    border: 1px solid #6D6D6C;
+    border-radius: 8px;
+    padding: 8px 8px;
+}
+
+.login-form button {
+    background-color: #2E6B80;
+    border-radius: 16px;
+    padding: 16px;
+    max-width: 40%;
+    border: none;
+    margin: auto;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Barlow-Regular, sans-serif;
+    font-weight: 700;
+}
+
+.error {
+    font-family: Barlow-Regular, sans-serif;
+    border-radius: 16px;
+    background-color: #ec3f3f;
+    color: #532c2c;
+    padding: 16px;
+}
+
+.uca-logo {
+    margin: auto;
+}

@@ -1,25 +1,27 @@
 <?php
 
 require_once 'model/Enseignant.php';
-require_once 'utils/FieldValidator.php';
+require_once 'util/EnseignantSession.php';
+require_once 'util/Helper.php';
 
 class AuthController {
     public Enseignant $enseignantModel;
 
-    public function __construct(PDO $pdo) {
+    public function __construct() {
+        global $pdo;
         $this->enseignantModel = new Enseignant($pdo);
     }
 
-    public function handle() {
+    public function handle(): void {
         $method = $_SERVER["REQUEST_METHOD"];
 
-        if (isset($_SESSION["id"])) {
+        if (EnseignantSession::isAuthenticated()) {
             header("Location: /");
             exit;
         }
 
         if ($method === "GET") {
-            include "view/login/index.php";
+            include "view/login/form.php";
             exit;
         }
 
@@ -29,13 +31,13 @@ class AuthController {
         }
     }
 
-    public function login($data) {
+    public function login($data): void {
         $email = $data["email"];
         $password = $data["password"];
 
         if (!isset($email) || !isset($password) ||!validateEmail($email)) {
             $error = "L'email n'est pas valide";
-            include "view/login/index.php";
+            include "view/login/form.php";
             return;
         }
 
@@ -43,9 +45,11 @@ class AuthController {
 
         if (!$teacher) {
             $error = "L'email ou mot de passe est incorrect";
-            include "view/login/index.php";
+            include "view/login/form.php";
             return;
         }
+
+        session_regenerate_id(true);
 
         $_SESSION["id"] = $teacher["IdEnseignant"];
         $_SESSION["nom"] = $teacher["nom"];
@@ -55,7 +59,7 @@ class AuthController {
         header("Location: /");
     }
 
-    public function logout() {
+    public function logout(): void {
         session_unset();
         session_destroy();
 

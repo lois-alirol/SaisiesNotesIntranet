@@ -7,33 +7,41 @@ require_once __DIR__ . '/controller/PlanningController.php';
 
 session_start();
 
-$authController = new AuthController($pdo);
+$authController = new AuthController();
 $grilleEvalController = new GrilleEvalController();
 $planningController = new planningController();
 
-$grilleEvalController->show(1, 2, "ENSTUTEUR", "PORTFOLIO");
+$url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$file = __DIR__ . $url;
 
-// //SI IL N'Y A PAS D'ACTION, ON AFFICHE LA LISTE
-// $action = $_GET['action'] ?? 'list';
+if ($url !== "/" && is_file($file)) {
+    return;
+}
 
-// //SWITCH DES ACTIONS, PAR DEFAUT AFFICHE LA LISTE
-// switch ($action) {
-//     case 'list':
-//         $controller->list();
-//         break;
-//     case 'add':
-//         $controller->add();
-//         break;
-//     case 'delete':
-//         $controller->delete($_GET['id']);
-//         break;
-//     case 'recoltes':
-//         $controller->showRecoltes($_GET['id']);
-//         break;
-//     case 'addrecoltes':
-//         $controller->addRecoltes($_GET['culture_id'], $_GET['dateRecolte'], $_GET['quantite']);
-//         break;
-//     default:
-//         echo "Action inconnue.";
-// }
-// ?>
+if (!EnseignantSession::isAuthenticated() && $url !== "/login") {
+    include __DIR__ . '/view/error/403.php';
+    return;
+}
+
+switch ($url) {
+    case "/login": {
+        $authController->handle();
+        break;
+    }
+    case "/logout": {
+        $authController->logout();
+        break;
+    }
+    case "/grille": {
+        $grilleEvalController->show();
+        break;
+    }
+    case "/planning": {
+        $planningController->Planning();
+        break;
+    }
+    default: {
+        include __DIR__ . '/view/error/404.php';
+        break;
+    }
+}

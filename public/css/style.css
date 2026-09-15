@@ -1,3 +1,19 @@
+@font-face {
+    font-family: Barlow-Regular;
+    src: url("../fonts/Barlow-Regular.woff2");
+}
+
+@font-face {
+    font-family: Barlow-Italic;
+    src: url("../fonts/Barlow-Italic.woff2");
+}
+
+@font-face {
+    font-family: Barlow-Bold;
+    src: url("../fonts/Barlow-Bold.woff2");
+}
+
+
 h1 {
     color: green;
 }

@@ -1,0 +1,49 @@
+.error-code {
+    font-family: Barlow-Bold, sans-serif;
+    font-size: 125px;
+    color: #6D6D6C;
+    margin: 0;
+}
+
+.error-message {
+    font-family: Barlow-Bold, sans-serif;
+    font-size: 48px;
+    color: #6D6D6C;
+    margin: 0;
+}
+
+p {
+    font-family: Barlow-Regular, sans-serif;
+    font-size: 16px;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    text-align: center;
+    background-color: #2E6B80
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    gap:4px;
+    margin: auto;
+    border-radius: 16px;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+
+.action-button {
+    background-color: #2E6B80;
+    border-radius: 16px;
+    padding: 16px;
+    max-width: 30%;
+    margin: auto;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-family: Barlow-Regular, sans-serif;
+    font-weight: 700;
+}
