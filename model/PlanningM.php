@@ -83,4 +83,21 @@ class planning
             return false;
         }
     }
+
+    public function getSalles(){
+            $sql = "SELECT idSalle FROM `salles`";
+
+        try 
+        {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+
+            return $stmt->fetchAll(PDO::FETCH_COLUMN);
+        }
+
+        catch (PDOException $e) 
+        {
+            return false;
+        }
+    }
 }
