@@ -19,10 +19,21 @@ h1 {
 }
 
 header {
-    padding: 5px;
-    text-align: center;
+    display: flex;
+    padding: 1px;
+    text-align: left;
     background-color: #2E6B80;
     width: 100%;
     color: white;
+    font-family: Barlow-Bold;
     font-size: 16px;
+    flex-direction: row;
+    align-items: center;
+}
+
+header .uca-logo{
+    padding: 10px;
+    margin-right: auto;
+    height: 75px;
+    width: auto;
 }

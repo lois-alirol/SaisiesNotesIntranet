@@ -9,6 +9,8 @@ sort($datesAnglais);
 sort($salles);
 ?>
 
+
+
 <link rel="stylesheet" href="/public/css/planning.css">
 
 <!--Dropdown pour selection la date a afficher-->
@@ -28,9 +30,10 @@ sort($salles);
 </select>
 
 <!--Check Box pour afficher ou non le planning d'anglais-->
-<input type="checkbox" id="anglaisToggle" />
-<label for="anglaisToggle" id="texte">Planning Anglais</label>
-
+<?php if (!empty($planningsAnglais)): ?>
+    <input type="checkbox" id="anglaisToggle" />
+    <label for="anglaisToggle" id="texte">Planning Anglais</label>
+<?php endif; ?>
 <!--Planning pour les Soutenances-->
 <div id="planning-general">
 
@@ -119,7 +122,6 @@ sort($salles);
 
 </div>
 
-
 <!--Planning pour les evals d'Anglais-->
 <div id="planning-anglais">
 <?php if (!empty($planningsAnglais)): ?>
@@ -197,18 +199,15 @@ sort($salles);
             </tbody>
         </table>
     <?php endforeach ?>
-<?php else:
-    return;
-endif; ?>
+<?php endif; ?>
 
 </div>
 
+
 <script>
+
+    
     const selectDate = document.getElementById('dateSlct');
-    const anglaisToggle = document.getElementById('anglaisToggle');
-    const divGeneral = document.getElementById('planning-general');
-    const divAnglais = document.getElementById('planning-anglais');
-    divAnglais.style.display = "none";
 
     selectDate.addEventListener('change', function() {
         const dateSelectionnee = this.value;
@@ -235,6 +234,13 @@ endif; ?>
         });
     });
 
+    <?php if (!empty($planningsAnglais)): ?>
+    const anglaisToggle = document.getElementById('anglaisToggle');
+    const divGeneral = document.getElementById('planning-general');
+    const divAnglais = document.getElementById('planning-anglais');
+    divAnglais.style.display = "none";
+
+
     anglaisToggle.addEventListener('change', function() {
 
         if (this.checked) 
@@ -248,5 +254,7 @@ endif; ?>
             divAnglais.style.display = "none";
         }
     });
+
+    <?php endif; ?>
 
 </script>
