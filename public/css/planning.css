@@ -1,86 +1,88 @@
- .planning {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: Arial, sans-serif;
-    }
+.planning {
+    margin: auto;
+    width: 50%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
 
 
-    .planning-date th {
-        background-color: #4d84bd;
-        color: white;
-        font-size: 24px;
-        font-weight: bold;
-        text-align: center;
-        padding: 6px;
-    }
+.planning-date th {
+    background-color: #4d84bd;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 6px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+}
 
 
-    .planning-header th {
-        background-color: #4d84bd;
-        color: white;
-        font-size: 18px;
-        font-weight: bold;
+.planning-header th {
+    background-color: #4d84bd;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
 
-        padding: 8px;
+    padding: 8px;
 
-        border-right: 2px solid white;
-        border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
 
-        text-align: center;
-    }
-
-
-    .colonne-heure {
-        width: 130px;
-    }
+    text-align: center;
+}
 
 
-    .planning .heure {
-        width: 130px;
-
-        background-color: #e5edf5;
-
-        text-align: center;
-        vertical-align: middle;
-
-        font-size: 18px;
-
-        border-right: 2px solid white;
-        border-bottom: 2px solid white;
-    }
+.colonne-heure {
+    width: 130px;
+}
 
 
-    .planning-cell {
+.planning .heure {
+    width: 130px;
 
-        background-color: #e5edf5;
+    background-color: #e5edf5;
 
-        text-align: center;
-        vertical-align: middle;
+    text-align: center;
+    vertical-align: middle;
 
-        padding: 10px;
+    font-size: 18px;
 
-        min-height: 120px;
-
-        border-right: 2px solid white;
-        border-bottom: 2px solid white;
-
-        font-size: 16px;
-
-        line-height: 1.5;
-    }
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+}
 
 
-    .passage {
-        padding: 5px;
-    }
+.planning-cell {
+
+    background-color: #e5edf5;
+
+    text-align: center;
+    vertical-align: middle;
+
+    padding: 10px;
+
+    min-height: 120px;
+
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+}
+
+.passage {
+    padding: 5px;
+}
 
 
-    .passage strong {
-        font-weight: bold;
-    }
+.passage strong {
+    font-weight: bold;
+}
 
 
-    .passage em {
-        font-weight: bold;
-        font-style: italic;
-    }
+.passage em {
+    font-weight: bold;
+    font-style: italic;
+}

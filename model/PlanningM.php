@@ -56,8 +56,7 @@ class planning
     TIME(ea.dateS) AS heure,
     ea.IdSalle AS salle,
     CONCAT(e1.prenom, ' ', e1.nom) AS professeur_1,
-    CONCAT(et.prenom, ' ', et.nom) AS eleve,
-    ent.nom AS entreprise
+    CONCAT(et.prenom, ' ', et.nom) AS eleve
     FROM evalanglais ea
     JOIN Enseignants e1
     ON ea.IdEnseignant = e1.IdEnseignant
@@ -66,8 +65,6 @@ class planning
     LEFT JOIN AnneeStage ast
     ON ast.IdEtudiant = ea.IdEtudiant
     AND ast.anneeDebut = ea.anneeDebut
-    LEFT JOIN Entreprises ent
-    ON ast.IdEntreprise = ent.IdEntreprise
     WHERE ea.anneeDebut = YEAR(CURDATE()) - 1
     AND (e1.IdEnseignant = :idEns)
     ORDER BY ea.dateS, ea.IdSalle;";
