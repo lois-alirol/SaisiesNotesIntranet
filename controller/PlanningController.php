@@ -12,7 +12,7 @@ private $PlanningModel;
     }
     //Controller du planning
     public function Planning() {
-        $idEnseignant = $_GET['enseignant'];
+        $idEnseignant = EnseignantSession::getData()["id"];
         $plannings = $this->PlanningModel->getPlanningEnseignants($idEnseignant);
         $planningsAnglais = $this->PlanningModel->getPlanningEnseignantsAnglais($idEnseignant);
 
