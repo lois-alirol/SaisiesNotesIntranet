@@ -8,6 +8,7 @@ class planning
         $this->pdo = $pdo;
     }
 
+    //Requete du planning
     public function getPlanningEnseignants($idEnseignant)
     { //idEbseignants pas encore pris en compte
         // Heure / salle / les 2 profs / élève / entreprise
@@ -31,7 +32,7 @@ class planning
     AND ast.anneeDebut = es.anneeDebut
     LEFT JOIN Entreprises ent
     ON ast.IdEntreprise = ent.IdEntreprise
-    WHERE es.anneeDebut = 2025
+    WHERE es.anneeDebut = YEAR(CURDATE()) - 1
     AND (e1.IdEnseignant = :idEns OR e2.IdEnseignant = :idEns)
     ORDER BY es.date_h, es.IdSalle;
     ";
@@ -48,6 +49,7 @@ class planning
         }
     }
 
+    //Requete du planning Anglais
     public function getPlanningEnseignantsAnglais($idEnseignant) 
     {
     $sql = "SELECT
@@ -67,11 +69,10 @@ class planning
     AND ast.anneeDebut = ea.anneeDebut
     LEFT JOIN Entreprises ent
     ON ast.IdEntreprise = ent.IdEntreprise
-    WHERE ea.anneeDebut = YEAR(CURDATE())
+    WHERE ea.anneeDebut = YEAR(CURDATE()) - 1
     AND (e1.IdEnseignant = :idEns)
     ORDER BY ea.dateS, ea.IdSalle;";
     
-
         try 
         {
             $stmt = $this->pdo->prepare($sql);
