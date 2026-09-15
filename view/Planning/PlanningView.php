@@ -6,6 +6,10 @@
         <th>Date</th>
         <th>Horraire</th>
         <th>Salles</th>
+        <th>Tuteur</th>
+        <th>Professeur supléant</th>
+        <th>Élève</th>
+        <th>Entreprise</th> 
     </tr>
     </thead>
     <tbody>
