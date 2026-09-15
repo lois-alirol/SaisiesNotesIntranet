@@ -9,8 +9,7 @@ class planning
     }
 
     public function getPlanningEnseignants($idEnseignant)
-    { //idEbseignants pas encore pris en compte
-        // Heure / salle / les 2 profs / élève / entreprise
+    { 
     $sql = "SELECT
     DATE(es.date_h) AS date,
     TIME(es.date_h) AS heure,
@@ -31,8 +30,8 @@ class planning
     AND ast.anneeDebut = es.anneeDebut
     LEFT JOIN Entreprises ent
     ON ast.IdEntreprise = ent.IdEntreprise
-    WHERE es.anneeDebut = 2025
-    AND (e1.IdEnseignant = :idEns OR e2.IdEnseignant = :idEns)
+    WHERE es.anneeDebut = YEAR(CURDATE())-1
+    AND (e1.IdEnseignant >= :idEns OR e2.IdEnseignant >= :idEns)
     ORDER BY es.date_h, es.IdSalle;
     ";
 
