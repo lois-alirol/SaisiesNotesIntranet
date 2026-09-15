@@ -13,7 +13,7 @@ require_once 'controller/ctrl_Eleve_Selectionne.php';
 $idUser = null; 
 $idEtudiant = null;
 // Valeurs de test par défaut (à adapter si besoin)
-$DEFAULT_USER_ID     = 1; // faux enseignant / secrétaire
+$DEFAULT_USER_ID     = 3; // faux enseignant / secrétaire
 $DEFAULT_ETUDIANT_ID = 2; // faux étudiant
 
 // Utilise les valeurs par défaut si les paramètres manquent
