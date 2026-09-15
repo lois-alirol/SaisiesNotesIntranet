@@ -6,6 +6,18 @@ sort($dates);
 
 <link rel="stylesheet" href="/public/css/planning.css">
 
+<label for="dateSlct">Date :</label>
+<select name="dateSlct" id="dateSlct">
+    <option value=null>Toutes</option>
+    <?php foreach ($dates as $date) : ?>
+        <option value=$date><?= htmlspecialchars($date) ?></option>
+    <?php endforeach ?>
+</select>
+
+<!--Check box pour witch entre planning anglais et général-->
+<input type="checkbox" id="PlanningG-A"/>
+<label for="PlanningG-A" id="texte">Planning général/Anglais</label>
+
 <h2>Planning</h2>
 
 <?php foreach ($dates as $curdate): ?>

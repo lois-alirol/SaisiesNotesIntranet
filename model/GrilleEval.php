@@ -81,7 +81,7 @@ class GrilleEval {
     }
 
     public function getFeedback($idGrille){
-         $stmt = $this->pdo->prepare("SELECT commentaireJur")
+         $stmt = $this->pdo->prepare("SELECT commentaireJur");
     }
 }
 
