@@ -18,6 +18,11 @@ if ($url !== "/" && is_file($file)) {
     return;
 }
 
+if (!EnseignantSession::isAuthenticated() && $url !== "/login") {
+    include __DIR__ . '/view/error/403.php';
+    return;
+}
+
 switch ($url) {
     case "/login": {
         $authController->handle();
