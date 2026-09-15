@@ -9,10 +9,6 @@ class GrilleEval {
         $this->pdo = $pdo;
     }
 
-    public function getAll(){
-        return $this->pdo->query("SELECT * FROM critereseval")->fetchAll();
-    }
-
     //METHODE QUI PERMET D'OBTENIR UN ARRAY DES CRITERES D'EVALUATION
     public function getTableauGrilleEval($idGrille, $idEval, $typeEnseignant, $cours){
         $req = "";   
@@ -84,11 +80,9 @@ class GrilleEval {
         return $stmt->fetch();
     }
 
-    // public function setEvaluateur(){
-    // }
-
-    // public function setStatut(){
-    // }
+    public function getFeedback($idGrille){
+         $stmt = $this->pdo->prepare("SELECT commentaireJur")
+    }
 }
 
 ?>  

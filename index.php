@@ -33,7 +33,7 @@ switch ($url) {
         break;
     }
     case "/grille": {
-        $grilleEvalController->show();
+        $grilleEvalController->show(1, 2, "ENSTUTEUR", "PORTFOLIO");
         break;
     }
     case "/planning": {
