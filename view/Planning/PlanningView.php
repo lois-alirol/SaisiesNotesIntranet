@@ -91,10 +91,19 @@ sort($salles);
                                     $planning['heure'] === $heure &&
                                     $planning['salle'] === $salle &&
                                     $planning['date'] === $curdate
-                                ): ?>
+                                    ):
+                                    //Affiche le niveau de l'Étudiant (BUT 2, BUT 3 ou BUT 3 alternance)
+                                    if ($planning['alternanceBUT3'] === 1):
+                                        $niveau = "BUT 3 (alternance)";
+                                    elseif ($planning['but3sinon2'] === 1):
+                                        $niveau = "(BUT 3)";
+                                    else:
+                                        $niveau = "(BUT 2)";
+                                    endif;
+                                    ?>
                                     <div class="passage">
                                         <strong>
-                                            <?= htmlspecialchars($planning['eleve']) ?>
+                                            <?= htmlspecialchars($planning['eleve'].' '.$niveau) ?>
                                         </strong>
                                         <br>
                                         <?= htmlspecialchars($planning['professeur_1']) ?>
@@ -182,10 +191,18 @@ sort($salles);
                                         $planning['heure'] === $heure &&
                                         $planning['salle'] === $salle &&
                                         $planning['date'] === $curdate
-                                    ): ?>
+                                    ): 
+                                        //Affiche le niveau de l'Étudiant (BUT 2, BUT 3 ou BUT 3 alternance)
+                                        if ($planning['alternanceBUT3'] === 1):
+                                            $niveau = "BUT 3 (alternance)";
+                                        elseif ($planning['but3sinon2'] === 1):
+                                            $niveau = "(BUT 3)";
+                                        else:
+                                            $niveau = "(BUT 2)";
+                                        endif;?>
                                         <div class="passage">
                                             <strong>
-                                                <?= htmlspecialchars($planning['eleve']) ?>
+                                                <?= htmlspecialchars($planning['eleve'].' '.$niveau) ?>
                                             </strong>
                                             <br>
                                             <?= htmlspecialchars($planning['professeur_1']) ?>

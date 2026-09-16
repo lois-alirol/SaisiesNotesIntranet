@@ -18,6 +18,8 @@ class planning
     CONCAT(e1.prenom, ' ', e1.nom) AS professeur_1,
     CONCAT(e2.prenom, ' ', e2.nom) AS professeur_2,
     CONCAT(et.prenom, ' ', et.nom) AS eleve,
+	ast.but3sinon2,
+	ast.alternanceBUT3,
     ent.nom AS entreprise
     FROM EvalStage es
     JOIN Enseignants e1
@@ -56,7 +58,9 @@ class planning
     TIME(ea.dateS) AS heure,
     ea.IdSalle AS salle,
     CONCAT(e1.prenom, ' ', e1.nom) AS professeur_1,
-    CONCAT(et.prenom, ' ', et.nom) AS eleve
+    CONCAT(et.prenom, ' ', et.nom) AS eleve,
+    ast.but3sinon2,
+    ast.alternanceBUT3
     FROM evalanglais ea
     JOIN Enseignants e1
     ON ea.IdEnseignant = e1.IdEnseignant
@@ -67,8 +71,8 @@ class planning
     AND ast.anneeDebut = ea.anneeDebut
     WHERE ea.anneeDebut = YEAR(CURDATE()) - 1
     AND (e1.IdEnseignant = :idEns)
-    ORDER BY ea.dateS, ea.IdSalle;";
-
+    ORDER BY ea.dateS, ea.IdSalle;
+    ";
         try 
         {
             $stmt = $this->pdo->prepare($sql);
