@@ -40,7 +40,7 @@ class GrilleEval {
                 WHERE modelesgrilleeval.natureGrille = 'ANGLAIS'
                 AND evalanglais.IdEvalanglais = :idEval";
                 break;
-            case "SOUTENANCES":
+            case "SOUTENANCE":
                 switch ($typeEnseignant){
                     case "ENSSECOND":
                         $req = "SELECT evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond,  critereseval.IdCritere, critereseval.descCourte, critereseval.descLongue, lescriteresnotessoutenanceenssecond.noteCritere
@@ -100,10 +100,10 @@ class GrilleEval {
             case "SOUTENANCE":
                 switch ($typeEnseignant){
                     case "ENSSECOND":
-                        $req = "SELECT evalsoutenanceenssecond.commentaireJury FROM evalsoutenanceenssecond WHERE evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
+                        $req = "SELECT evalsoutenanceenssecond.commentaireEnsSecond AS commentaireJury FROM evalsoutenanceenssecond WHERE evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
                         break;
                     case "ENSTUTEUR":
-                        $req = "SELECT evalsoutenanceenstuteur.commentaireJury FROM evalsoutenanceenstuteur WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
+                        $req = "SELECT evalsoutenanceenstuteur.commentaireEnsTut AS commentaireJury FROM evalsoutenanceenstuteur WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
                         break;
                 }
                 break;

@@ -17,6 +17,7 @@ class planning
     es.IdSalle AS salle,
     CONCAT(e1.prenom, ' ', e1.nom) AS professeur_1,
     CONCAT(e2.prenom, ' ', e2.nom) AS professeur_2,
+    et.IdEtudiant AS idEtudiant,
     CONCAT(et.prenom, ' ', et.nom) AS eleve,
 	ast.but3sinon2,
 	ast.alternanceBUT3,
@@ -62,7 +63,8 @@ class planning
     CONCAT(et.prenom, ' ', et.nom) AS eleve,
     ast.but3sinon2,
     ast.alternanceBUT3,
-    ea.dateS 
+    es.dateS
+    et.IdEtudiant AS idEtudiant
     FROM evalanglais ea
     JOIN Enseignants e1
     ON ea.IdEnseignant = e1.IdEnseignant
