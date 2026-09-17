@@ -23,25 +23,48 @@ if (!EnseignantSession::isAuthenticated() && $url !== "/login") {
     return;
 }
 
-switch ($url) {
-    case "/login": {
-        $authController->handle();
-        break;
+// Interception de la soumission du formulaire
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['validate'])) {
+        // Appelle la méthode qui modifie le statut en BDD
+        $grilleEvalController->validerEvaluation();
+        
+        // Optionnel : Redirection pour éviter de renvoyer le formulaire en rafraîchissant
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
     }
-    case "/logout": {
-        $authController->logout();
-        break;
-    }
-    case "/grille": {
-        $grilleEvalController->show(1, 2, "ENSTUTEUR", "PORTFOLIO");
-        break;
-    }
-    case "/planning": {
-        $planningController->Planning();
-        break;
-    }
-    default: {
-        include __DIR__ . '/view/error/404.php';
-        break;
+    
+    if (isset($_POST['Enregistrer'])) {
+        // Insérez ici votre logique pour enregistrer les notes (ex: $grilleEvalController->enregistrerNotes();)
     }
 }
+
+
+
+
+        switch ($url) {
+            case "/login": {
+                $authController->handle();
+                break;
+            }
+            case "/logout": {
+                $authController->logout();
+                break;
+            }
+            case "/grille": {
+                $grilleEvalController->show(1, 2, "ENSTUTEUR", "PORTFOLIO");
+                break;
+            }
+            case "/planning": {
+                $planningController->Planning();
+                break;
+            }
+            default: {
+                include __DIR__ . '/view/error/404.php';
+                break;
+            }
+        }
+
+        
+    
+?>

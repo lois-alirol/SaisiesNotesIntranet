@@ -3,11 +3,14 @@
 <?php include 'view/layout/header.php'; ?>
 <link rel="stylesheet" type="text/css" href="public/css/grilleEval.css">
 
+<?php $idtest = 1; ?>
+
 <h2>Grille d'évaluation</h2>
 
 <p>Cours : <?= $modeleeval["natureGrille"]?></p>
 <p>Devoir : <?= $modeleeval["nomModuleGrilleEvaluation"]?></p>
 
+<form method="POST" action="">
 <table>
 <!--AJOUT D'UNE LIGNE POUR CHAQUE $c DANS LE TABLEAU $critereseval-->
 
@@ -21,7 +24,7 @@
         <td><?= $c['descCourte'] ?></td>
         <td><?= $c['descLongue'] ?></td>
         <td><span id="max-value-<?= $c['IdCritere'] ?>"></span></td>
-        <td><input type="range" id="slider-<?= $c['IdCritere'] ?>" value="0" min="0" max="<?= $c["noteCritere"] ?>" step='0.25' /><br><span id="value-<?= $c['IdCritere'] ?>"></td>
+        <td><input type="range" name="notes[<?= $c['IdCritere'] ?>]" id="slider-<?= $c['IdCritere'] ?>" value="0" min="0" max="<?= $c["noteCritere"] ?>" step='0.25' /><br><span id="value-<?= $c['IdCritere'] ?>"></td>
     </tr>
 <?php endforeach; ?>
 </table>
@@ -61,12 +64,31 @@
 </script>
 
 <div>
-    <textarea><?=$feedback?></textarea>
+    <textarea name="feedback"><?=$feedback?></textarea>
 </div>
 
 <div>
-    <button>Enregistrer</button>
-    <button>Valider</button>
+        <button type="submit" name="Enregistrer" value="Enregistrer">Enregistrer</button>
+        <button type="submit" name="validate" value="validate">Valider</button>
 </div>
+</form>
 
 <!-- http://localhost/SaisiesNotesIntranet/view/grilleEval/show.php -->
+
+<?php
+echo "$idtest";
+/*function enregistrerNotes(PDO $pdo): void
+{
+    $req = $pdo->prepare(
+        "UPDATE evalanglais
+        SET Statut = 'VALIDEE'
+        WHERE IdEvalAnglais = 1;"
+    );
+    $stmt = $pdo->prepare($req);
+    $stmt->execute();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    enregistrerNotes($pdo);
+}*/
+?>

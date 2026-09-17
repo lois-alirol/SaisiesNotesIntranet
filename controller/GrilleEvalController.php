@@ -17,6 +17,10 @@ class GrilleEvalController {
 
         include 'view/grilleEval/show.php';
     }
+
+    public function validerEvaluation() { 
+        $this->grilleEvalModel->modifierStatut(1); 
+    }   
 }
 
 ?>
