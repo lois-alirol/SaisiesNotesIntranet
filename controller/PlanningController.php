@@ -4,7 +4,7 @@ require_once 'model/PlanningM.php';
 
 class PlanningController {
     
-private $PlanningModel;
+    private $PlanningModel;
 
     public function __construct() {
         global $pdo;
