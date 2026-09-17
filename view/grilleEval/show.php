@@ -3,14 +3,14 @@
 <?php include 'view/layout/header.php'; ?>
 <link rel="stylesheet" type="text/css" href="public/css/grilleEval.css">
 
-<?php $idtest = 1; ?>
-
 <h2>Grille d'évaluation</h2>
 
 <p>Cours : <?= $modeleeval["natureGrille"]?></p>
 <p>Devoir : <?= $modeleeval["nomModuleGrilleEvaluation"]?></p>
 
 <form method="POST" action="">
+    <input type="hidden" name="idEval" value="<?= htmlspecialchars($modeleeval['IdModeleEval'], ENT_QUOTES, 'UTF-8') ?>">
+    <input type="hidden" name="noteCritaire" value="<?= htmlspecialchars($modeleeval['typeEnseignant'], ENT_QUOTES, 'UTF-8') ?>">
 <table>
 <!--AJOUT D'UNE LIGNE POUR CHAQUE $c DANS LE TABLEAU $critereseval-->
 
@@ -74,21 +74,3 @@
 </form>
 
 <!-- http://localhost/SaisiesNotesIntranet/view/grilleEval/show.php -->
-
-<?php
-echo "$idtest";
-/*function enregistrerNotes(PDO $pdo): void
-{
-    $req = $pdo->prepare(
-        "UPDATE evalanglais
-        SET Statut = 'VALIDEE'
-        WHERE IdEvalAnglais = 1;"
-    );
-    $stmt = $pdo->prepare($req);
-    $stmt->execute();
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    enregistrerNotes($pdo);
-}*/
-?>
