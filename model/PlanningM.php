@@ -7,11 +7,11 @@ class planning
     {
         $this->pdo = $pdo;
     }
-    
+
     //Requete du planning
     public function getPlanningEnseignants($idEnseignant)
-    { 
-    $sql = "SELECT
+    {
+        $sql = "SELECT
     DATE(es.date_h) AS date,
     TIME(es.date_h) AS heure,
     es.IdSalle AS salle,
@@ -27,7 +27,7 @@ class planning
     JOIN Enseignants e1
     ON es.IdEnseignantTuteur = e1.IdEnseignant
     LEFT JOIN Enseignants e2
-    ON es.IdEnseignantSecond = e2.IdEnseignant
+    ON es.IdSecondEnseignant = e2.IdEnseignant
     JOIN EtudiantsBUT2ou3 et
     ON es.IdEtudiant = et.IdEtudiant
     LEFT JOIN AnneeStage ast
@@ -48,14 +48,14 @@ class planning
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } catch (PDOException $e) {
-            return false;
+            die("Erreur SQL : " . $e->getMessage());
         }
     }
 
     //Requete du planning Anglais
-    public function getPlanningEnseignantsAnglais($idEnseignant) 
+    public function getPlanningEnseignantsAnglais($idEnseignant)
     {
-    $sql = "SELECT
+        $sql = "SELECT
     DATE(ea.dateS) AS date,
     TIME(ea.dateS) AS heure,
     ea.IdSalle AS salle,
@@ -63,7 +63,7 @@ class planning
     CONCAT(et.prenom, ' ', et.nom) AS eleve,
     ast.but3sinon2,
     ast.alternanceBUT3,
-    es.dateS,
+    es.dateS
     et.IdEtudiant AS idEtudiant
     FROM evalanglais ea
     JOIN Enseignants e1
@@ -77,34 +77,27 @@ class planning
     AND (e1.IdEnseignant = :idEns)
     ORDER BY ea.dateS, ea.IdSalle;
     ";
-        try 
-        {
+        try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->bindParam(":idEns", $idEnseignant);
             $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-
-        catch (PDOException $e) 
-        {
-            return false;
+        } catch (PDOException $e) {
+            die("Erreur SQL : " . $e->getMessage());
         }
     }
 
-    public function getSalles(){
-            $sql = "SELECT idSalle FROM `salles`";
+    public function getSalles()
+    {
+        $sql = "SELECT idSalle FROM `salles`";
 
-        try 
-        {
+        try {
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
 
             return $stmt->fetchAll(PDO::FETCH_COLUMN);
-        }
-
-        catch (PDOException $e) 
-        {
+        } catch (PDOException $e) {
             return false;
         }
     }
