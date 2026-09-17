@@ -119,6 +119,19 @@ sort($salles);
                                         <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
+                                <?php 
+                                //date() -> donne la date courante
+                                //On compare la date courante aet la date du créneau
+                                //Si la date est inferieur, sois passée, -> case en vert
+                                $dateCourante = date("Y-m-d h:i:s");
+                                $datetest = "2027-09-17 10:00:00";
+                                if($planning["date_h"] < $dateCourante): ?>
+                                <style>
+                                .planning-cell {
+                                    background-color: #e5f5eb; 
+                                }
+                                </style>
+                                <?php endif ?>
                             <?php endforeach; ?>
                         </td>
                     <?php endforeach; ?>
@@ -185,7 +198,7 @@ sort($salles);
                             <?= date('H:i', strtotime($heure)) ?>
                         </td>
                         <?php foreach ($salles as $salle): ?>
-                            <td class="planning-cell">
+                            <td class="planning-cellA">
                                 <?php foreach ($planningsAnglais as $planning): ?>
                                     <?php if (
                                         $planning['heure'] === $heure &&
@@ -208,6 +221,18 @@ sort($salles);
                                             <?= htmlspecialchars($planning['professeur_1']) ?>
                                         </div>
                                     <?php endif; ?>
+                                    <?php
+                                    //date() -> donne la date courante
+                                    //On compare la date courante et la date du créneau
+                                    //Si la date est inferieur, sois passée, -> case en vert
+                                    $dateCourante = date("Y-m-d h:i:s");
+                                    if($planning['dateS'] < $dateCourante): ?>
+                                    <style>
+                                    .planning-cellA {
+                                        background-color: #e5f5eb; 
+                                    }
+                                    </style>
+                                    <?php endif ?>
                                 <?php endforeach; ?>
                             </td>
                         <?php endforeach; ?>
@@ -219,7 +244,6 @@ sort($salles);
 <?php endif; ?>
 
 </div>
-
 
 <script>    
     const selectDate = document.getElementById('dateSlct');

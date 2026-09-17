@@ -20,7 +20,8 @@ class planning
     CONCAT(et.prenom, ' ', et.nom) AS eleve,
 	ast.but3sinon2,
 	ast.alternanceBUT3,
-    ent.nom AS entreprise
+    ent.nom AS entreprise,
+    es.date_h
     FROM EvalStage es
     JOIN Enseignants e1
     ON es.IdEnseignantTuteur = e1.IdEnseignant
@@ -60,7 +61,8 @@ class planning
     CONCAT(e1.prenom, ' ', e1.nom) AS professeur_1,
     CONCAT(et.prenom, ' ', et.nom) AS eleve,
     ast.but3sinon2,
-    ast.alternanceBUT3
+    ast.alternanceBUT3,
+    ea.dateS 
     FROM evalanglais ea
     JOIN Enseignants e1
     ON ea.IdEnseignant = e1.IdEnseignant
