@@ -68,7 +68,7 @@ class GrilleEval {
         $stmt->bindParam(":idEval", $idEval);
         $stmt->execute();
         
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); //http://localhost:8000/grille?eval=1&typeEnseignant=1&cours=PORTFOLIO
     }
 
     //METHODE QUI PERMET D'OBTENIR LES INFORMATIONS SUR LA GRILLE D'EVALUATION EN QUESTION

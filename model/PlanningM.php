@@ -63,7 +63,7 @@ class planning
     CONCAT(et.prenom, ' ', et.nom) AS eleve,
     ast.but3sinon2,
     ast.alternanceBUT3,
-    es.dateS
+    es.dateS,
     et.IdEtudiant AS idEtudiant
     FROM evalanglais ea
     JOIN Enseignants e1
