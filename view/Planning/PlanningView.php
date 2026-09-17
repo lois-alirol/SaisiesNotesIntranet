@@ -19,7 +19,7 @@ sort($salles);
     <option value="">Toutes</option>
     <?php foreach ($dates as $date): ?>
         <option value="<?= htmlspecialchars($date) ?>"> 
-            <?= htmlspecialchars($date) ?>
+            <?= !empty($date) ? htmlspecialchars($date) : '' ?>
         </option>
     <?php endforeach; ?>
     <?php foreach ($datesAnglais as $date): ?>
@@ -62,7 +62,7 @@ sort($salles);
             <tr class="planning-date">
                 <th colspan="<?= count($salles) + 1 ?>">
                     <?php if (!empty($plannings)): ?>
-                        <?= date('d/m/Y', strtotime($curdate)) ?>
+                        <?= !empty($curdate) ? date('d/m/Y', strtotime($curdate)) : '' ?>
                     <?php endif; ?>
                 </th>
             </tr>
@@ -191,7 +191,7 @@ sort($salles);
                                         $planning['heure'] === $heure &&
                                         $planning['salle'] === $salle &&
                                         $planning['date'] === $curdate
-                                    ): 
+                                    ):
                                         //Affiche le niveau de l'Étudiant (BUT 2, BUT 3 ou BUT 3 alternance)
                                         if ($planning['alternanceBUT3'] === 1):
                                             $niveau = "BUT 3 (alternance)";

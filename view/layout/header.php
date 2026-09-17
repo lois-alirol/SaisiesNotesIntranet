@@ -19,9 +19,9 @@
                     <span class="line line3"></span>
                 </div>
                 <ul class="menu-items">
-                    <li><a href="/logout">Logout</a></li>
                     <li><a href="/planning">Planning</a></li>
                     <li><a href="/grille">Grille</a></li>
+                    <li><a href="/logout">Logout</a></li>
                 </ul>
                 <h1 class="logo">Navbar</h1>
             </div>

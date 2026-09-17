@@ -81,6 +81,17 @@
     font-weight: bold;
 }
 
+.passage-etudiant {
+    color: inherit;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.passage-etudiant:hover,
+.passage-etudiant:focus-visible {
+    text-decoration: underline;
+}
+
 
 .passage em {
     font-weight: bold;
