@@ -20,6 +20,7 @@
                 </div>
                 <ul class="menu-items">
                     <li><a href="/planning">Planning</a></li>
+                    <li><a href="/historique">Etudiants</a></li>
                     <li><a href="/grille">Grille</a></li>
                     <li><a href="/logout">Logout</a></li>
                 </ul>
