@@ -27,7 +27,7 @@ class planning
     JOIN Enseignants e1
     ON es.IdEnseignantTuteur = e1.IdEnseignant
     LEFT JOIN Enseignants e2
-    ON es.IdSecondEnseignant = e2.IdEnseignant
+    ON es.IdEnseignantSecond = e2.IdEnseignant
     JOIN EtudiantsBUT2ou3 et
     ON es.IdEtudiant = et.IdEtudiant
     LEFT JOIN AnneeStage ast
