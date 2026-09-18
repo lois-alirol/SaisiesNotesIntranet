@@ -127,8 +127,7 @@ sort($salles);
                                 //On compare la date courante aet la date du créneau
                                 //Si la date est inferieur, sois passée, -> case en vert
                                 $dateCourante = date("Y-m-d h:i:s");
-                                $datetest = "2024-06-17 8:00:00";
-                                if($datetest > $planning['date_h']): ?>
+                                if($dateCourante > $planning['date_h']): ?>
                                 <style>
                                 .planning-cell {
                                     background-color: #e5f5eb; 
@@ -229,7 +228,7 @@ sort($salles);
                                     //On compare la date courante et la date du créneau
                                     //Si la date est inferieur, sois passée, -> case en vert
                                     $dateCourante = date("Y-m-d h:i:s");                          
-                                    if($datetest > $planning['dateS']): ?>
+                                    if($dateCourante > $planning['dateS']): ?>
                                     <style>
                                     .planning-cellA {
                                         background-color: #e5f5eb; 
