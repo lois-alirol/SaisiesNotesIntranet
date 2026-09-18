@@ -9,6 +9,53 @@ class GrilleEval {
         $this->pdo = $pdo;
     }
 
+    //RECUPERE UN ARRAY AVEC ID, NOM, PRENOM DE L'ETUDIANT A PARTIR DE l'ID EVAL ET DU COURS
+    public function getEtudiantFromEval($idEval, $cours){
+        $req = "";
+        switch ($cours){
+            case "PORTFOLIO":
+                $req = "SELECT etudiantsbut2ou3.nom, etudiantsbut2ou3.prenom, etudiantsbut2ou3.IdEtudiant
+                        FROM etudiantsbut2ou3
+                        JOIN evalportfolio ON evalportfolio.IdEtudiant = etudiantsbut2ou3.IdEtudiant
+                        WHERE evalportfolio.IdEvalPortfolio = :idEval";
+                break;
+            case "RAPPORT":
+                $req = "SELECT etudiantsbut2ou3.nom, etudiantsbut2ou3.prenom, etudiantsbut2ou3.IdEtudiant
+                        FROM etudiantsbut2ou3
+                        JOIN evalrapport ON evalrapport.IdEtudiant = etudiantsbut2ou3.IdEtudiant
+                        WHERE evalrapport.IdEvalRapport = :idEval";
+                break;
+            case "ANGLAIS":
+                $req = "SELECT etudiantsbut2ou3.nom, etudiantsbut2ou3.prenom, etudiantsbut2ou3.IdEtudiant
+                        FROM etudiantsbut2ou3
+                        JOIN evalanglais ON evalanglais.IdEtudiant = etudiantsbut2ou3.IdEtudiant
+                        WHERE evalanglais.IdEvalAnglais = :idEval";
+                break;
+            case "SOUTENANCE":
+                switch ($typeEnseignant){
+                    case "ENSSECOND":
+                        $req = "SELECT etudiantsbut2ou3.nom, etudiantsbut2ou3.prenom, etudiantsbut2ou3.IdEtudiant
+                                FROM etudiantsbut2ou3
+                                JOIN evalsoutenanceenssecond ON evalsoutenanceenssecond.IdEnseignant = etudiantsbut2ou3.IdEtudiant
+                                WHERE evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
+                        break;
+                    case "ENSTUTEUR":
+                        $req = "SELECT etudiantsbut2ou3.nom, etudiantsbut2ou3.prenom, etudiantsbut2ou3.IdEtudiant
+                                FROM etudiantsbut2ou3
+                                JOIN evalsoutenanceenstuteur ON evalsoutenanceenstuteur.IdEnseignant = etudiantsbut2ou3.IdEtudiant
+                                WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
+                        break;
+                }
+            break;
+        }
+
+        $stmt = $this->pdo->prepare($req);
+        $stmt->bindParam(":idEval", $idEval);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
+    }
+
     //METHODE QUI PERMET D'OBTENIR UN ARRAY DES CRITERES D'EVALUATION
     public function getTableauGrilleEval($idEval, $typeEnseignant, $cours){
         $req = "";   
@@ -40,25 +87,14 @@ class GrilleEval {
                 WHERE modelesgrilleeval.natureGrille = 'ANGLAIS'
                 AND evalanglais.IdEvalanglais = :idEval";
                 break;
-            // case "STAGE":
-            //     $req = "SELECT evalstage.IdEvalstage,  critereseval.IdCritere, critereseval.descCourte, critereseval.descLongue, lescriteresnotesstage.noteCritere
-            //     FROM critereseval
-            //     JOIN lescriteresnotesstage ON lescriteresnotesstage.idCritere = critereseval.idCritere
-            //     JOIN evalstage ON evalstage.IdEvalstage = lescriteresnotesstage.IdEvalstage
-            //     JOIN modelesgrilleeval ON modelesgrilleeval.IdModeleEval = evalstage.IdModeleEval
-            //     WHERE modelesgrilleeval.natureGrille = 'STAGE'
-            //     AND evalstage.IdEvalstage = :idEval";
-            //     break;
             case "SOUTENANCE":
                 switch ($typeEnseignant){
                     case "ENSSECOND":
-                        $req = "SELECT evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond,  critereseval.IdCritere, critereseval.descCourte, critereseval.descLongue, lescriteresnotessoutenanceenssecond.noteCritere
-                        FROM critereseval
-                        JOIN lescriteresnotessoutenanceenssecond ON lescriteresnotessoutenanceenssecond.idCritere = critereseval.idCritere
-                        JOIN evalsoutenanceenssecond ON evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = lescriteresnotessoutenanceenssecond.IdEvalSoutenanceEnsSecond
-                        JOIN modelesgrilleeval ON modelesgrilleeval.IdModeleEval = evalsoutenanceenssecond.IdModeleEval
-                        WHERE modelesgrilleeval.natureGrille = 'SOUTENANCE'
-                        AND evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
+                        $req = "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
+                        FROM evalsoutenanceenssecond
+                        JOIN modelesgrilleeval
+                        ON modelesgrilleeval.IdModeleEval = evalsoutenanceenssecond.IdModeleEval
+                        WHERE evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
                         break;
                     case "ENSTUTEUR":
                         $req = "SELECT evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut,  critereseval.IdCritere, critereseval.descCourte, critereseval.descLongue, lescriteresnotessoutenanceenstut.noteCritere
@@ -76,22 +112,60 @@ class GrilleEval {
         $stmt = $this->pdo->prepare($req);
         $stmt->bindParam(":idEval", $idEval);
         $stmt->execute();
-        
-        return $stmt->fetchAll(PDO::FETCH_ASSOC); //http://localhost:8000/grille?eval=1&typeEnseignant=1&cours=PORTFOLIO
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     //METHODE QUI PERMET D'OBTENIR LES INFORMATIONS SUR LA GRILLE D'EVALUATION EN QUESTION
-    public function getModeleGrilleEval($idEval){
-        $stmt = $this->pdo->prepare(
-            "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
-            FROM evalportfolio
-            JOIN modelesgrilleeval
-            ON modelesgrilleeval.IdModeleEval = evalportfolio.IdModeleEval
-            WHERE evalportfolio.IdEvalPortfolio = :idEval");
+    public function getModeleGrilleEval($idEval, $cours){
+        $req = "";
+        switch ($cours){
+            case "PORTFOLIO":
+                $req = "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
+                        FROM evalportfolio
+                        JOIN modelesgrilleeval
+                        ON modelesgrilleeval.IdModeleEval = evalportfolio.IdModeleEval
+                        WHERE evalportfolio.IdEvalPortfolio = :idEval";
+                break;
+            case "RAPPORT":
+                $req = "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
+                        FROM evalrapport
+                        JOIN modelesgrilleeval
+                        ON modelesgrilleeval.IdModeleEval = evalrapport.IdModeleEval
+                        WHERE evalrapport.IdEvalRapport = :idEval";
+                break;
+            case "ANGLAIS":
+                $req = "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
+                        FROM evalanglais
+                        JOIN modelesgrilleeval
+                        ON modelesgrilleeval.IdModeleEval = evalanglais.IdModeleEval
+                        WHERE evalanglais.IdEvalanglais = :idEval";
+                break;
+            case "SOUTENANCE":
+                switch ($typeEnseignant){
+                    case "ENSSECOND":
+                        $req = "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
+                        FROM evalsoutenanceenstuteur
+                        JOIN modelesgrilleeval
+                        ON modelesgrilleeval.IdModeleEval = evalsoutenanceenstuteur.IdModeleEval
+                        WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
+                        break;
+                    case "ENSTUTEUR":
+                        $req = "SELECT modelesgrilleeval.IdModeleEval, modelesgrilleeval.natureGrille, modelesgrilleeval.noteMaxGrille, modelesgrilleeval.nomModuleGrilleEvaluation, modelesgrilleeval.anneeDebut  
+                        FROM evalsoutenanceenstuteur
+                        JOIN modelesgrilleeval
+                        ON modelesgrilleeval.IdModeleEval = evalsoutenanceenstuteur.IdModeleEval
+                        WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
+                        break;
+                }
+            break;
+        }
+
+        $stmt = $this->pdo->prepare($req);
         $stmt->bindParam(":idEval", $idEval);
         $stmt->execute();
-        
-        return $stmt->fetch();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC)[0];
     }
 
     public function getFeedback($idEval, $typeEnseignant, $cours){
@@ -106,9 +180,6 @@ class GrilleEval {
             case "ANGLAIS":
                 $req = "SELECT evalanglais.commentaireJury FROM evalanglais WHERE evalanglais.IdEvalAnglais = :idEval";
                 break;
-            // case "STAGE":
-            //     $req = "SELECT evalstage.commentaireJury FROM evalstage WHERE evalstage.IdEvalstage = :idEval";
-            //     break;
             case "SOUTENANCE":
                 switch ($typeEnseignant){
                     case "ENSSECOND":

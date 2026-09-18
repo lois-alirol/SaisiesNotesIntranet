@@ -10,13 +10,14 @@ class GrilleEvalController {
     }
 
     public function show() {
-        $idEval = $_GET["eval"] ?? 1;
-        $typeEnseignant = $_GET["typeEnseignant"] ?? 2;
-        $cours = $_GET["cours"] ?? "ANGLAIS";
+        $idEval = $_GET["eval"] ?? null;
+        $typeEnseignant = $_GET["typeEnseignant"] ?? null;
+        $cours = $_GET["cours"] ?? null;
 
         $critereseval = $this->grilleEvalModel->getTableauGrilleEval($idEval, $typeEnseignant, $cours);
-        $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idEval);
+        $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idEval, $cours);
         $feedback = $this->grilleEvalModel->getFeedback($idEval, $typeEnseignant, $cours);
+        $etudiant = $this->grilleEvalModel->getEtudiantFromEval($idEval, $cours);
 
         include 'view/grilleEval/show.php';
     }
