@@ -30,7 +30,7 @@
                 <td><?= $c['descLongue'] ?></td>
                 <td class="slider-box">
                     <div>    
-                        <input type="range" id="slider-<?= $c['IdCritere'] ?>" value="0" min="0" max="<?= $c["noteCritere"] ?>" step='0.25' />
+                        <input type="range" id="slider-<?= $c['IdCritere'] ?>" value="0" min="0" max="<?= $c["noteCritere"] ?>" step='0.1' />
                     </div>
                     <div>
                         <span id="value-<?= $c['IdCritere'] ?>"></span>/<span class="max-value" id="max-value-<?= $c['IdCritere'] ?>"></span></td>
