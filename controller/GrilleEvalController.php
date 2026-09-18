@@ -11,7 +11,7 @@ class GrilleEvalController {
 
     public function show() {
         $idEval = $_GET["eval"] ?? 1; //SUPPR : METTRE NULL
-        $typeEnseignant = $_GET["typeEnseignant"] ?? 2;
+        $typeEnseignant = $_GET["typeEnseignant"] ?? 4;
         $cours = $_GET["cours"] ?? "ANGLAIS";
 
         $critereseval = $this->grilleEvalModel->getTableauGrilleEval($idEval, $typeEnseignant, $cours);
@@ -21,8 +21,9 @@ class GrilleEvalController {
         include 'view/grilleEval/show.php';
     }
 
-    public function validerEvaluation($idEval) { 
-        //$this->grilleEvalModel->updateNote(1);
+    public function validerEvaluation($idEval, $notes, $critaireId, $tableName) { 
         $this->grilleEvalModel->modifierStatut($idEval); 
+
+        $this->grilleEvalModel->updateNotes($notes, $idEval, $critaireId, $tableName);
     }   
 }

@@ -32,17 +32,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Erreur : idEval manquant.";
             exit();
         }
-        // Appelle la méthode qui modifie le statut en BDD
-        $grilleEvalController->validerEvaluation($_POST['idEval']);
+    if (!isset($_POST['notes'])) {
+            echo "Erreur : noteCritaire manquant.";
+            exit();
+    }
+    if (!isset($_POST['critaireId'])) {
+            echo "Erreur : critaireId manquant.";
+            exit();
+    }
+    if (!isset($_POST['tableName'])) {
+            echo "Erreur : coursType tableName manquant.";
+            exit();
+    }
+    $grilleEvalController->validerEvaluation($_POST['idEval'], $_POST['notes'], $_POST['critaireId'], $_POST['tableName']);
         
-        // Optionnel : Redirection pour éviter de renvoyer le formulaire en rafraîchissant
-        header("Location: " . $_SERVER['REQUEST_URI']);
-        exit();
-    }
+    // Optionnel : Redirection pour éviter de renvoyer le formulaire en rafraîchissant
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit();
+}
     
-    if (isset($_POST['Enregistrer'])) {
-        // Insérez ici votre logique pour enregistrer les notes (ex: $grilleEvalController->enregistrerNotes();)
-    }
+if (isset($_POST['Enregistrer'])) {
+    echo "OUI";
+        exit();
+}
 }
 
 

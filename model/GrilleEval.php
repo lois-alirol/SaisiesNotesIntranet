@@ -130,16 +130,18 @@ class GrilleEval {
 
         
 
-    public function updateNotes($data, $idEvalAnglais) {
-        
-        // Assuming $data contains the updated notes for each criterion
-            $stmt = $this->pdo->prepare(
-            "UPDATE evalanglais 
-            SET Statut = 'VALIDEE' 
-            WHERE IdEvalAnglais = :idEvalAnglais");
-            $stmt->bindParam(":idEvalAnglais", $idEvalAnglais);
+    public function updateNotes($notes, $idEval, $critaireId, $tableName) {
+        foreach ($notes as $critereId => $note) {
+            $stmt = $this->pdo->prepare("UPDATE :tableName SET noteCritere = :note WHERE IdEval = :idEval AND IdCritere = :critereId");
+            $stmt->bindParam(":tableName", $tableName);
+            $stmt->bindParam(":note", $note);
+            $stmt->bindParam(":idEval", $idEval);
+            $stmt->bindParam(":critereId", $critereId);
             $stmt->execute();
+        }
+        
     }
+
     public function modifierStatut(int $idEval) {
          $stmt = $this->pdo->prepare("UPDATE evalanglais SET Statut = 'VALIDEE' WHERE IdEvalAnglais = :idEval"); 
          $stmt->bindParam(":idEval", $idEval, PDO::PARAM_INT);
