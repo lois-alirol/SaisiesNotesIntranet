@@ -247,9 +247,34 @@ label[for="dateSlct"] {
     box-shadow: 0 0 0 3px rgba(22, 141, 154, 0.18);
 }
 
+/*Légende du code couleur*/
+#legende{
+    position: absolute;
+    top: 60px;
+    right: 0;
+    text-align: right;
+    margin-right: 20px;
+}
+#legende1 {
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #e5f5eb; 
+    padding: 5px;
+}
+
+#legende2 {
+    color: #444;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #e5edf5;
+    padding: 5px;
+}
 
 /*Responsive*/
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     .planning{
     width: 90%;
     }
