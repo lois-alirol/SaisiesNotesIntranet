@@ -40,6 +40,15 @@ class GrilleEval {
                 WHERE modelesgrilleeval.natureGrille = 'ANGLAIS'
                 AND evalanglais.IdEvalanglais = :idEval";
                 break;
+            // case "STAGE":
+            //     $req = "SELECT evalstage.IdEvalstage,  critereseval.IdCritere, critereseval.descCourte, critereseval.descLongue, lescriteresnotesstage.noteCritere
+            //     FROM critereseval
+            //     JOIN lescriteresnotesstage ON lescriteresnotesstage.idCritere = critereseval.idCritere
+            //     JOIN evalstage ON evalstage.IdEvalstage = lescriteresnotesstage.IdEvalstage
+            //     JOIN modelesgrilleeval ON modelesgrilleeval.IdModeleEval = evalstage.IdModeleEval
+            //     WHERE modelesgrilleeval.natureGrille = 'STAGE'
+            //     AND evalstage.IdEvalstage = :idEval";
+            //     break;
             case "SOUTENANCE":
                 switch ($typeEnseignant){
                     case "ENSSECOND":
@@ -97,6 +106,9 @@ class GrilleEval {
             case "ANGLAIS":
                 $req = "SELECT evalanglais.commentaireJury FROM evalanglais WHERE evalanglais.IdEvalAnglais = :idEval";
                 break;
+            // case "STAGE":
+            //     $req = "SELECT evalstage.commentaireJury FROM evalstage WHERE evalstage.IdEvalstage = :idEval";
+            //     break;
             case "SOUTENANCE":
                 switch ($typeEnseignant){
                     case "ENSSECOND":
