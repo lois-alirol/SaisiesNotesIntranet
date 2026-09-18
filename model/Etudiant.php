@@ -1,6 +1,7 @@
 <?php
 
-function getDossiersStageEtudiant($idEtudiant, $idEnseignant) {
+function getDossiersStageEtudiant($idEnseignant)
+{
     global $pdo;
 
     $sql = "SELECT
@@ -58,22 +59,53 @@ function getDossiersStageEtudiant($idEtudiant, $idEnseignant) {
             ON soutenanceSecond.IdEtudiant = a.IdEtudiant
             AND soutenanceSecond.anneeDebut = a.anneeDebut
             AND soutenanceSecond.IdEnseignant = :idEnseignantSoutenanceSecond
-            WHERE e.IdEtudiant = :idEtudiant
-                AND (
-                    es.IdEnseignantTuteur = :idEnseignantTuteur
+            WHERE   es.IdEnseignantTuteur = :idEnseignantTuteur
                     OR es.IdEnseignantSecond = :idEnseignantSecond
                     OR ea.IdEnseignant = :idEnseignantAnglais
-                )
             ORDER BY a.anneeDebut DESC";
-    $statement = $pdo->prepare($sql);
-    $statement->execute([
-        'idEtudiant' => $idEtudiant,
-        'idEnseignantSoutenanceTuteur' => $idEnseignant,
-        'idEnseignantSoutenanceSecond' => $idEnseignant,
-        'idEnseignantTuteur' => $idEnseignant,
-        'idEnseignantSecond' => $idEnseignant,
-        'idEnseignantAnglais' => $idEnseignant,
-    ]);
 
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $statement = $pdo->prepare($sql);
+        $statement->execute([
+            'idEnseignantSoutenanceTuteur' => $idEnseignant,
+            'idEnseignantSoutenanceSecond' => $idEnseignant,
+            'idEnseignantTuteur' => $idEnseignant,
+            'idEnseignantSecond' => $idEnseignant,
+            'idEnseignantAnglais' => $idEnseignant,
+        ]);
+
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Erreur SQL : " . $e->getMessage());
+    }
+}
+
+function getProfEtudiant($idEnseignant)
+{
+    global $pdo;
+
+    $sql = "SELECT 
+            DISTINCT et.IdEtudiant,
+            et.nom,
+            et.prenom,
+            anst.but3sinon2,
+            es.IdEvalStage,
+            ea.IdEvalAnglais,
+            ep.IdEvalPortfolio
+            FROM etudiantsbut2ou3 as et
+            JOIN anneestage as anst on anst.IdEtudiant = et.IdEtudiant
+            JOIN evalstage as es on es.IdEtudiant = et.IdEtudiant
+            JOIN evalanglais as ea on ea.IdEtudiant = et.IdEtudiant
+            JOIN evalportfolio as ep on ep.IdEtudiant = et.IdEtudiant
+            JOIN evalrapport as er on er.IdEtudiant = et.IdEtudiant
+            WHERE es.IdEnseignantTuteur = :idEnseignant OR es.IdEnseignantSecond = :idEnseignant OR ea.IdEnseignant = :idEnseignant";
+
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(":idEnseignant", $idEnseignant);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Erreur SQL : " . $e->getMessage());
+    }
 }
