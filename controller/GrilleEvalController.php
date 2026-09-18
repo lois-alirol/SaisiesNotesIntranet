@@ -10,9 +10,9 @@ class GrilleEvalController {
     }
 
     public function show() {
-        $idEval = $_GET["eval"] ?? 1; //SUPPR : METTRE NULL
-        $typeEnseignant = $_GET["typeEnseignant"] ?? 2;
-        $cours = $_GET["cours"] ?? "ANGLAIS";
+        $idEval = $_GET["eval"] ?? null;
+        $typeEnseignant = $_GET["typeEnseignant"] ?? null;
+        $cours = $_GET["cours"] ?? null;
 
         $critereseval = $this->grilleEvalModel->getTableauGrilleEval($idEval, $typeEnseignant, $cours);
         $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idEval);
