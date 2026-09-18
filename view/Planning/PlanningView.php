@@ -228,7 +228,7 @@ sort($salles);
                                     //date() -> donne la date courante
                                     //On compare la date courante et la date du créneau
                                     //Si la date est inferieur, sois passée, -> case en vert
-                                    $dateCourante = date("Y-m-d h:i:s");
+                                    $dateCourante = date("Y-m-d h:i:s");                          
                                     if($datetest > $planning['dateS']): ?>
                                     <style>
                                     .planning-cellA {
