@@ -18,7 +18,10 @@
 <div class="content">
     <div class="table-box">
         <h2>Notes :</h2>
-        <table>
+        <form method="POST" action="">
+    <input type="hidden" name="idEval" value="<?= htmlspecialchars($modeleeval['IdModeleEval'], ENT_QUOTES, 'UTF-8') ?>">
+    <input type="hidden" name="noteCritaire" value="<?= htmlspecialchars($modeleeval['typeEnseignant'], ENT_QUOTES, 'UTF-8') ?>">
+<table>
 
         <th>Critere</th>
             <th>Description</th>
@@ -30,7 +33,7 @@
                 <td><?= $c['descLongue'] ?></td>
                 <td class="slider-box">
                     <div>    
-                        <input type="range" id="slider-<?= $c['IdCritere'] ?>" value="0" min="0" max="<?= $c["noteCritere"] ?>" step='0.1' />
+                        <input type="range" name="notes[<?= $c['IdCritere'] ?>]" id="slider-<?= $c['IdCritere'] ?>" value="0" min="0" max="<?= $c["noteCritere"] ?>" step='0.25' />
                     </div>
                     <div>
                         <span id="value-<?= $c['IdCritere'] ?>"></span>/<span class="max-value" id="max-value-<?= $c['IdCritere'] ?>"></span></td>
@@ -59,13 +62,14 @@
 
     <div class="feedback-box">
         <h2>Feedback :</h2>
-        <textarea><?=$feedback["commentaireJury"]?></textarea>
+        <textarea name="feedback"><?=$feedback["commentaireJury"]?></textarea>
     </div>
 </div>
 
 <div class="save-bar">
-    <button>Enregistrer</button>
-    <button>Valider</button>
+        <button type="submit" name="Enregistrer" value="Enregistrer">Enregistrer</button>
+        <button type="submit" name="validate" value="validate">Valider</button>
 </div>
+</form>
 
 <!-- http://localhost/SaisiesNotesIntranet/view/grilleEval/show.php -->

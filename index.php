@@ -25,6 +25,29 @@ if (!EnseignantSession::isAuthenticated() && $url !== "/login") {
     return;
 }
 
+// Interception de la soumission du formulaire
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['validate'])) {
+        if (!isset($_POST['idEval'])) {
+            echo "Erreur : idEval manquant.";
+            exit();
+        }
+        // Appelle la méthode qui modifie le statut en BDD
+        $grilleEvalController->validerEvaluation($_POST['idEval']);
+        
+        // Optionnel : Redirection pour éviter de renvoyer le formulaire en rafraîchissant
+        header("Location: " . $_SERVER['REQUEST_URI']);
+        exit();
+    }
+    
+    if (isset($_POST['Enregistrer'])) {
+        // Insérez ici votre logique pour enregistrer les notes (ex: $grilleEvalController->enregistrerNotes();)
+    }
+}
+
+
+
+
 switch ($url) {
     case "/login": {
         $authController->handle();

@@ -129,6 +129,22 @@ class GrilleEval {
     }
 
         
+
+    public function updateNotes($data, $idEvalAnglais) {
+        
+        // Assuming $data contains the updated notes for each criterion
+            $stmt = $this->pdo->prepare(
+            "UPDATE evalanglais 
+            SET Statut = 'VALIDEE' 
+            WHERE IdEvalAnglais = :idEvalAnglais");
+            $stmt->bindParam(":idEvalAnglais", $idEvalAnglais);
+            $stmt->execute();
+    }
+    public function modifierStatut(int $idEval) {
+         $stmt = $this->pdo->prepare("UPDATE evalanglais SET Statut = 'VALIDEE' WHERE IdEvalAnglais = :idEval"); 
+         $stmt->bindParam(":idEval", $idEval, PDO::PARAM_INT);
+         $stmt->execute(); 
+    }
 }
 
 ?>  
