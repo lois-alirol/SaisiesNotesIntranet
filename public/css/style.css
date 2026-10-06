@@ -120,7 +120,6 @@ header h3 {
 }
 
 .navbar a {
-    height: 100%;
 
     display: flex;
     align-items: center;
@@ -142,11 +141,13 @@ header h3 {
 
 .navbar a:hover {
     color: white;
-    background-color: rgba(255, 255, 255, 0.12);
+    text-decoration: underline;
 }
 
 .navbar a[href="/logout"] {
-    color: #af0000;
+    background-color: #b82a2a;
+    padding: 1ch;
+    border-radius: 5px;
     font-weight: 1000;
 }
 

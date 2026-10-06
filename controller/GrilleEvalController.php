@@ -10,20 +10,36 @@ class GrilleEvalController {
     }
 
     public function show() {
-        $idEval = $_GET["eval"] ?? null;
+        $idEval = $_GET["idEval"] ?? null;
         $typeEnseignant = $_GET["typeEnseignant"] ?? null;
         $cours = $_GET["cours"] ?? null;
 
+        //SI ON A POSTE LE FORMULAIRE DE VALIDATION
+        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+            $notes = $_POST["notes"]; //IdCritere => VALUER CHOISIE
+
+            //SI ENREGISTRE, SINON VALIDE
+            if ($_POST["save"]){
+                $this->grilleEvalModel->save($idEval, $cours, $typeEnseignant, $notes, "SAISIE");
+            }else {
+                $this->grilleEvalModel->save($idEval, $cours, $typeEnseignant, $notes, "VALIDEE");
+            }
+            
+        }
+
         $critereseval = $this->grilleEvalModel->getTableauGrilleEval($idEval, $typeEnseignant, $cours);
+
         $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idEval, $cours);
-        $feedback = $this->grilleEvalModel->getFeedback($idEval, $typeEnseignant, $cours);
-        $etudiant = $this->grilleEvalModel->getEtudiantFromEval($idEval, $cours);
+        $noteMaximale = $modeleeval["noteMaxGrille"];
+
+        $resultatEval = $this->grilleEvalModel->getResultatEval($idEval, $typeEnseignant, $cours);
+        $feedback = $resultatEval["commentaireJury"];
+        $noteFinale = $resultatEval["note"];
+
+        $etudiant = $this->grilleEvalModel->getEtudiantFromEval($idEval, $typeEnseignant, $cours);
 
         include 'view/grilleEval/show.php';
     }
-
-    public function validerEvaluation($idEval) { 
-        //$this->grilleEvalModel->updateNote(1);
-        $this->grilleEvalModel->modifierStatut($idEval); 
-    }   
 }
+
+?>
