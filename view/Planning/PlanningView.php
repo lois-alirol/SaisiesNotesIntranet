@@ -22,12 +22,13 @@ sort($salles);
     <option value="">Toutes</option>
     <?php foreach ($dates as $date): ?>
         <option value="<?= htmlspecialchars($date) ?>"> 
-            <?= !empty($date) ? htmlspecialchars($date) : '' ?>
+            <?= !empty($date) ? htmlspecialchars($date) : ''?>
+            
         </option>
     <?php endforeach; ?>
     <?php foreach ($datesAnglais as $date): ?>
         <option value="<?= htmlspecialchars($date) ?>">
-            <?= htmlspecialchars($date) ?>
+            <?= htmlspecialchars($date)?>
         </option>
     <?php endforeach; ?>
 </select>
