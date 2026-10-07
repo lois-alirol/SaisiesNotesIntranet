@@ -48,19 +48,33 @@
             </table>
         </div>
 
-        <h2 class>Note finale : <?= $noteFinale ?> / <?= $noteMaximale ?></h2>
+        <!-- SUPPRR -->
+        <h2 id="note-finale">Note finale : <?= $noteFinale ?> / <?= $noteMaximale ?></h2>
 
         <script>
+            let noteFinale = document.getElementById("note-finale");
+            let noteFinalCalcul = 0;
+            let tabNotes = [];
+
             <?php foreach ($critereseval as $c): ?>
-                var slider<?= $c["IdCritere"] ?> = document.getElementById("slider-<?= $c["IdCritere"] ?>");
-                var output<?= $c["IdCritere"] ?> = document.getElementById("value-<?= $c["IdCritere"] ?>");
-                var maxValue<?= $c["IdCritere"] ?> = document.getElementById("max-value-<?= $c["IdCritere"] ?>");
+                let slider<?= $c["IdCritere"] ?> = document.getElementById("slider-<?= $c["IdCritere"] ?>");
+                let output<?= $c["IdCritere"] ?> = document.getElementById("value-<?= $c["IdCritere"] ?>");
+                let maxValue<?= $c["IdCritere"] ?> = document.getElementById("max-value-<?= $c["IdCritere"] ?>");
 
                 maxValue<?= $c["IdCritere"] ?>.innerHTML = <?= $c["ValeurMaxCritereEVal"] ?>;
                 output<?= $c["IdCritere"] ?>.innerHTML = slider<?= $c["IdCritere"] ?>.value;
+
+                tabNotes[<?= $c["IdCritere"] - 1?>] = Number(slider<?= $c["IdCritere"] ?>.value);
+
                 slider<?= $c["IdCritere"] ?>.oninput = function() {
                     output<?= $c["IdCritere"] ?>.innerHTML = this.value;
+                    tabNotes[<?= $c["IdCritere"] - 1?>] = Number(this.value);
+
+                    noteFinalCalcul = 0
+                    tabNotes.forEach((el) => noteFinalCalcul += el);
+                    noteFinale.textContent = "Note finale : " + noteFinalCalcul + "/" + <?= $noteMaximale ?>;
                 };
+
             <?php endforeach; ?>
         </script>
 
