@@ -122,26 +122,26 @@ if (isset($error)): ?>
                             $idEvalAnglais = historiqueValeur($dossier, 'IdEvalAnglais');
                         ?>
                         <li class="historique-statut">
-                            <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&eval=<?= $idEvalStage ?>&cours=SOUTENANCE">Stage</a></span>
+                            <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&idEval=<?= $idEvalStage ?>&cours=SOUTENANCE">Stage</a></span>
                             <span class="historique-badge <?= historiqueClasseStatut($dossier['statutStage']) ?>">
                                 <?= escape(historiqueLibelleStatut($dossier['statutStage'])) ?>
                             </span>
                         </li>
                         <li class="historique-statut">
-                            <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&eval=<?= $idEvalRapport ?>&cours=RAPPORT">Rapport</a></span>
+                            <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&idEval=<?= $idEvalRapport ?>&cours=RAPPORT">Rapport</a></span>
                             <span class="historique-badge <?= historiqueClasseStatut($dossier['statutRapport']) ?>">
                                 <?= escape(historiqueLibelleStatut($dossier['statutRapport'])) ?>
                             </span>
                         </li>
                         <li class="historique-statut">
-                            <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&eval=<?= $idEvalPortfolio ?>&cours=PORTFOLIO">Portfolio</a></span>
+                            <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&idEval=<?= $idEvalPortfolio ?>&cours=PORTFOLIO">Portfolio</a></span>
                             <span class="historique-badge <?= historiqueClasseStatut($dossier['statutPortfolio']) ?>">
                                 <?= escape(historiqueLibelleStatut($dossier['statutPortfolio'])) ?>
                             </span>
                         </li>
                         <?php if (($dossier['idEvaluateurAnglais'] ?? 0) === $idEnseignant): ?>
                             <li class="historique-statut">
-                                <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&eval=<?= $idEvalAnglais ?>&cours=ANGLAIS">Anglais</a></span>
+                                <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&idEval=<?= $idEvalAnglais ?>&cours=ANGLAIS">Anglais</a></span>
                                 <span class="historique-badge <?= historiqueClasseStatut($dossier['statutAnglais']) ?>">
                                     <?= escape(historiqueLibelleStatut($dossier['statutAnglais'])) ?>
                                 </span>

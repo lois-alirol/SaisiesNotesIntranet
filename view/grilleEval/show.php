@@ -34,7 +34,7 @@
                             <td><?= $c["descCourte"] ?></td>
                             <td><?= $c["descLongue"] ?></td>
                             <td class="slider-box">
-                                <div>    
+                                <div>
                                     <input type="range" name="notes[<?= $c["IdCritere"] ?>]" id="slider-<?= $c["IdCritere"] ?>" value="<?= $c["noteCritere"]?>" min="0" max="<?= $c["ValeurMaxCritereEVal"] ?>" step="0.1" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?> />
                                 </div>
                                 <div>
@@ -47,7 +47,6 @@
             </table>
         </div>
 
-        <!-- SUPPRR -->
         <h2 id="note-finale">Note finale : <?= $noteFinale ?> / <?= $noteMaximale ?></h2>
 
         <script>
@@ -83,8 +82,8 @@
         </div>
 
         <div class="save-bar">
-            <button type="submit" name="save" value="save" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?>>Enregistrer</button>
-            <button type="submit" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?>>Valider</button>
+            <button type="submit" name="save" value="save" <?php if ($resultatEval["Statut"] === "BLOQUEE") echo "disabled" ?>>Enregistrer</button>
+            <button type="submit" <?php if ($resultatEval["Statut"] === "BLOQUEE") echo "disabled" ?>>Valider</button>
         </div>
     </div>
 </form>

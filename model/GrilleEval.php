@@ -133,7 +133,7 @@ class GrilleEval {
     }
 
     //METHODE QUI PERMET D"OBTENIR LES INFORMATIONS SUR LA GRILLE D"EVALUATION EN QUESTION
-    public function getModeleGrilleEval($idEval, $cours) {
+    public function getModeleGrilleEval($idEval, $typeEnseignant, $cours) {
         $req = "";
         switch ($cours) {
             case "PORTFOLIO":
@@ -199,10 +199,11 @@ class GrilleEval {
             case "SOUTENANCE":
                 switch ($typeEnseignant) {
                     case "ENSSECOND":
-                        $req = "SELECT * AS commentaireJury FROM evalsoutenanceenssecond WHERE evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
+                        $req = "SELECT IdEvalSoutenanceEnsSecond, noteEnsSecond AS note, commentaireEnsSecond AS commentaireJury, Statut, IdModeleEval,	IdEtudiant,	IdEnseignant, anneeDebut
+                        FROM evalsoutenanceenssecond WHERE evalsoutenanceenssecond.IdEvalSoutenanceEnsSecond = :idEval";
                         break;
                     case "ENSTUTEUR":
-                        $req = "SELECT * AS commentaireJury FROM evalsoutenanceenstuteur WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
+                        $req = "SELECT commentaireEnsTuteur AS commentaireJury FROM evalsoutenanceenstuteur WHERE evalsoutenanceenstuteur.IdEvalSoutenanceEnsTut = :idEval";
                         break;
                 }
                 break;

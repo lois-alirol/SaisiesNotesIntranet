@@ -29,10 +29,11 @@ class GrilleEvalController {
 
         $critereseval = $this->grilleEvalModel->getTableauGrilleEval($idEval, $typeEnseignant, $cours);
 
-        $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idEval, $cours);
+        $modeleeval = $this->grilleEvalModel->getModeleGrilleEval($idEval, $typeEnseignant, $cours);
         $noteMaximale = $modeleeval["noteMaxGrille"];
 
         $resultatEval = $this->grilleEvalModel->getResultatEval($idEval, $typeEnseignant, $cours);
+        
         $feedback = $resultatEval["commentaireJury"];
         $noteFinale = $resultatEval["note"];
 
