@@ -25,7 +25,7 @@ function historiqueDate($date, $heure = true) {
 
 function historiqueLibelleStatut($statut) {
     return match ($statut) {
-        'SAISIE' => 'En cours de saisie',
+        'EN_SAISIE' => 'En cours de saisie',
         'BLOQUEE' => 'Bloquée',
         'REMONTEE' => 'À valider',
         'VALIDEE' => 'Validée',
@@ -36,7 +36,7 @@ function historiqueLibelleStatut($statut) {
 
 function historiqueClasseStatut($statut) {
     return match ($statut) {
-        'SAISIE' => 'statut-saisie',
+        'EN_SAISIE' => 'statut-saisie',
         'BLOQUEE' => 'statut-bloquee',
         'REMONTEE' => 'statut-remontee',
         'VALIDEE', 'DIFFUSEE' => 'statut-validee',
