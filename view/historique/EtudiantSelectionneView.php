@@ -29,16 +29,16 @@ if (isset($error)): ?>
         </div>
 
         <li class="historique-statut">
-            <span><a href="/grille?eval=<?= $dossier['IdEvalStage'] ?>&cours=SOUTENANCE">Stage</a></span>
+            <span><a href="/grille?idEval=<?= $dossier['IdEvalStage'] ?>&cours=SOUTENANCE">Stage</a></span>
         </li>
         <li class="historique-statut">
-            <span><a href="/grille?eval=<?= $dossier['IdEvalPortfolio'] ?>&cours=RAPPORT">Rapport</a></span>
+            <span><a href="/grille?idEval=<?= $dossier['IdEvalPortfolio'] ?>&cours=RAPPORT">Rapport</a></span>
         </li>
         <li class="historique-statut">
-            <span><a href="/grille?eval=<?= $dossier['IdEvalPortfolio'] ?>&cours=PORTFOLIO">Portfolio</a></span>
+            <span><a href="/grille?idEval=<?= $dossier['IdEvalPortfolio'] ?>&cours=PORTFOLIO">Portfolio</a></span>
         </li>
         <li class="historique-statut">
-            <span><a href="/grille?eval=<?= $dossier['IdEvalAnglais']?>&cours=ANGLAIS">Anglais</a></span>
+            <span><a href="/grille?idEval=<?= $dossier['IdEvalAnglais']?>&cours=ANGLAIS">Anglais</a></span>
         </li>
     </div>
 <?php endforeach; ?>
