@@ -29,6 +29,8 @@ function getDossiersStageEtudiant($idEtudiant, $idEnseignant) {
                 salle.description AS descriptionSalle,
                 enseignant.IdEnseignant AS IdEnseignantTuteur,
                 enseignant_1.IdEnseignant AS IdEnseignantSecond,
+                soutenanceTuteur.IdEvalSoutenanceEnsTut AS IdEvalSoutenanceTuteur,
+                soutenanceSecond.IdEvalSoutenanceEnsSecond AS IdEvalSoutenanceSecond,
                 CONCAT(enseignant.prenom, ' ', enseignant.nom) AS enseignantTuteur,
                 CONCAT(enseignant_1.prenom, ' ', enseignant_1.nom) AS enseignantSecond,
                 er.IdEvalRapport,

@@ -120,6 +120,8 @@ if (isset($error)): ?>
                             $idEvalRapport = historiqueValeur($dossier, 'IdEvalRapport');
                             $idEvalPortfolio = historiqueValeur($dossier, 'IdEvalPortfolio');
                             $idEvalAnglais = historiqueValeur($dossier, 'IdEvalAnglais');
+
+                            $idEvalSoutenance = $isTuteur ? historiqueValeur($dossier, 'IdEvalSoutenanceTuteur') : historiqueValeur($dossier, 'IdEvalSoutenanceSecond');
                         ?>
                         <li class="historique-statut">
                             <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&idEval=<?= $idEvalStage ?>&cours=SOUTENANCE">Stage</a></span>
@@ -149,7 +151,7 @@ if (isset($error)): ?>
                         <?php endif; ?>
                         <?php if (($dossier['statutSoutenance'] ?? null) !== null): ?>
                             <li class="historique-statut">
-                                <span>Grille de soutenance</span>
+                                <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&eval=<?= $idEvalSoutenance ?>&cours=SOUTENANCE">Grille de soutenance</a></span>
                                 <span class="historique-badge <?= historiqueClasseStatut($dossier['statutSoutenance']) ?>">
                                     <?= escape(historiqueLibelleStatut($dossier['statutSoutenance'])) ?>
                                 </span>
