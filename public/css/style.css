@@ -29,7 +29,7 @@ body {
 
 header {
     width: 100%;
-    height: 60px;
+    height: 80px;
 
     display: flex;
     align-items: center;
@@ -52,23 +52,10 @@ header .uca-logo {
     object-fit: contain;
 }
 
-
-header h3 {
-    margin: 0 30px 0 0;
-
-    color: white;
-
-    font-family: "Barlow-Bold", sans-serif;
-    font-size: 16px;
-    font-weight: normal;
-
-    white-space: nowrap;
-}
-
 .navbar {
-    position: static;
+    position: sticky;
 
-    width: auto;
+    width: 100%;
     height: 100%;
 
     display: flex;
@@ -119,6 +106,20 @@ header h3 {
     padding: 0;
 }
 
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.navbar .enseignant {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    margin-left: auto;
+}
+
 .navbar a {
 
     display: flex;
@@ -131,7 +132,7 @@ header h3 {
     text-decoration: none;
 
     font-family: "Barlow-Regular", sans-serif;
-    font-size: 15px;
+    font-size: 20px;
     font-weight: normal;
 
     transition:
@@ -139,16 +140,9 @@ header h3 {
         color 0.2s ease;
 }
 
-.navbar a:hover {
-    color: white;
-    text-decoration: underline;
-}
-
-.navbar a[href="/logout"] {
-    background-color: #b82a2a;
-    padding: 1ch;
-    border-radius: 5px;
-    font-weight: 1000;
+.navbar li:hover {
+    background-color: #6ea8b1;
+    cursor: pointer;
 }
 
 .logo {
