@@ -28,8 +28,8 @@ function getDossiersStageEtudiant($idEnseignant)
                 es.Statut AS statutStage,
                 es.IdSalle AS idSalle,
                 salle.description AS descriptionSalle,
-                enseignantTuteur.IdEnseignant AS IdEnseignantTuteur,
-                enseignantSecond.IdEnseignant AS IdEnseignantSecond,
+                IdEnseignant.IdEnseignant AS IdEnseignant,
+                IdEnseignant_1.IdEnseignant AS IdEnseignant_1,
                 CONCAT(enseignantTuteur.prenom, ' ', enseignantTuteur.nom) AS enseignantTuteur,
                 CONCAT(enseignantSecond.prenom, ' ', enseignantSecond.nom) AS enseignantSecond,
                 er.IdEvalRapport,
@@ -46,8 +46,8 @@ function getDossiersStageEtudiant($idEnseignant)
             LEFT JOIN Entreprises ent ON ent.IdEntreprise = a.IdEntreprise
             LEFT JOIN EvalStage es ON es.IdEtudiant = a.IdEtudiant AND es.anneeDebut = a.anneeDebut
             LEFT JOIN Salles salle ON salle.IdSalle = es.IdSalle
-            LEFT JOIN Enseignants enseignantTuteur ON enseignantTuteur.IdEnseignant = es.IdEnseignantTuteur
-            LEFT JOIN Enseignants enseignantSecond ON enseignantSecond.IdEnseignant = es.IdEnseignantSecond
+            LEFT JOIN Enseignants enseignantTuteur ON enseignantTuteur.IdEnseignant = es.IdEnseignant
+            LEFT JOIN Enseignants enseignantSecond ON enseignantSecond.IdEnseignant = es.IdEnseignant_1
             LEFT JOIN EvalRapport er ON er.IdEtudiant = a.IdEtudiant AND er.anneeDebut = a.anneeDebut
             LEFT JOIN EvalPortfolio ep ON ep.IdEtudiant = a.IdEtudiant AND ep.anneeDebut = a.anneeDebut
             LEFT JOIN EvalAnglais ea ON ea.IdEtudiant = a.IdEtudiant AND ea.anneeDebut = a.anneeDebut
@@ -59,8 +59,8 @@ function getDossiersStageEtudiant($idEnseignant)
             ON soutenanceSecond.IdEtudiant = a.IdEtudiant
             AND soutenanceSecond.anneeDebut = a.anneeDebut
             AND soutenanceSecond.IdEnseignant = :idEnseignantSoutenanceSecond
-            WHERE   es.IdEnseignantTuteur = :idEnseignantTuteur
-                    OR es.IdEnseignantSecond = :idEnseignantSecond
+            WHERE   es.IdEnseignant = :IdEnseignant
+                    OR es.IdEnseignant_1 = :idEnseignantSecond
                     OR ea.IdEnseignant = :idEnseignantAnglais
             ORDER BY a.anneeDebut DESC";
 
@@ -69,7 +69,7 @@ function getDossiersStageEtudiant($idEnseignant)
         $statement->execute([
             'idEnseignantSoutenanceTuteur' => $idEnseignant,
             'idEnseignantSoutenanceSecond' => $idEnseignant,
-            'idEnseignantTuteur' => $idEnseignant,
+            'IdEnseignant' => $idEnseignant,
             'idEnseignantSecond' => $idEnseignant,
             'idEnseignantAnglais' => $idEnseignant,
         ]);
@@ -98,7 +98,7 @@ function getProfEtudiant($idEnseignant)
             JOIN evalanglais as ea on ea.IdEtudiant = et.IdEtudiant
             JOIN evalportfolio as ep on ep.IdEtudiant = et.IdEtudiant
             JOIN evalrapport as er on er.IdEtudiant = et.IdEtudiant
-            WHERE es.IdEnseignantTuteur = :idEnseignant OR es.IdEnseignantSecond = :idEnseignant OR ea.IdEnseignant = :idEnseignant";
+            WHERE es.IdEnseignant = :idEnseignant OR es.IdEnseignant_1 = :idEnseignant OR ea.IdEnseignant = :idEnseignant";
 
     try {
         $stmt = $pdo->prepare($sql);

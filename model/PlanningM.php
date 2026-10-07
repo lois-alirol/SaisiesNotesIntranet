@@ -25,9 +25,9 @@ class planning
     es.date_h
     FROM EvalStage es
     JOIN Enseignants e1
-    ON es.IdEnseignantTuteur = e1.IdEnseignant
+    ON es.IdEnseignant = e1.IdEnseignant
     LEFT JOIN Enseignants e2
-    ON es.IdEnseignantSecond = e2.IdEnseignant
+    ON es.IdEnseignant_1 = e2.IdEnseignant
     JOIN EtudiantsBUT2ou3 et
     ON es.IdEtudiant = et.IdEtudiant
     LEFT JOIN AnneeStage ast
