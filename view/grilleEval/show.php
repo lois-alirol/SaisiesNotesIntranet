@@ -20,7 +20,6 @@
         <div class="table-box">
             <h2>Notes :</h2>
             <input type="hidden" name="idEval" value="<?= htmlspecialchars($modeleeval["IdModeleEval"], ENT_QUOTES, "UTF-8") ?>">
-
             <table>
                 <thead>
                     <tr>
@@ -36,10 +35,10 @@
                             <td><?= $c["descLongue"] ?></td>
                             <td class="slider-box">
                                 <div>    
-                                    <input type="range" name="notes[<?= $c["IdCritere"] ?>]" id="slider-<?= $c["IdCritere"] ?>" value="<?= $c["noteCritere"]?>" min="0" max="<?= $c["ValeurMaxCritereEVal"] ?>" step="0.1" />
+                                    <input type="range" name="notes[<?= $c["IdCritere"] ?>]" id="slider-<?= $c["IdCritere"] ?>" value="<?= $c["noteCritere"]?>" min="0" max="<?= $c["ValeurMaxCritereEVal"] ?>" step="0.1" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?> />
                                 </div>
                                 <div>
-                                    <span id="value-<?= $c["IdCritere"] ?>"></span>/<span class="max-value" id="max-value-<?= $c["IdCritere"] ?>"></span>
+                                    <span id="value-<?= $c["IdCritere"] ?>"></span>/<span class="max-value" id="max-value-<?= $c["IdCritere"] ?>" disabled></span>
                                 </div>
                             </td>
                         </tr>
@@ -84,8 +83,8 @@
         </div>
 
         <div class="save-bar">
-            <button type="submit" name="save" value="save">Enregistrer</button>
-            <button type="submit">Valider</button>
+            <button type="submit" name="save" value="save" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?>>Enregistrer</button>
+            <button type="submit" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?>>Valider</button>
         </div>
     </div>
 </form>
