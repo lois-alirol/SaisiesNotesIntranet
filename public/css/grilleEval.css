@@ -58,9 +58,15 @@ button{
   font-weight: 500;
 }
 
+button:disabled{
+  cursor: not-allowed;
+  background-color: #668994;
+}
+
 .save-bar{
   width: 100%;
-  border-top: 1px solid #506168;
+  border: 1px solid #d7e6ed;;
+  border-radius: 4px;
   background-color: #e9f0f5;
   padding: 0.5em;
   margin-top: 1em;
@@ -103,7 +109,6 @@ main{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   height: 100%;
 }
 
