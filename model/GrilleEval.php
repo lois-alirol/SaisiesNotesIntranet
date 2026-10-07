@@ -9,7 +9,7 @@ class GrilleEval {
         $this->pdo = $pdo;
     }
 
-    //RECUPERE UN ARRAY AVEC ID, NOM, PRENOM DE L"ETUDIANT A PARTIR DE l"ID EVAL ET DU COURS
+    //RECUPERE UN ARRAY AVEC ID, NOM, PRENOM DE L"ETUDIANT A PARTIR DE l'ID EVAL ET DU COURS
     public function getEtudiantFromEval($idEval, $typeEnseignant, $cours) {
         $req = "";
         switch ($cours) {
