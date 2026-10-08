@@ -149,14 +149,6 @@ if (isset($error)): ?>
                                 </span>
                             </li>
                         <?php endif; ?>
-                        <?php if (($dossier['statutSoutenance'] ?? null) !== null): ?>
-                            <li class="historique-statut">
-                                <span><a href="/grille?typeEnseignant=<?= $typeEnseignant ?>&eval=<?= $idEvalSoutenance ?>&cours=SOUTENANCE">Grille de soutenance</a></span>
-                                <span class="historique-badge <?= historiqueClasseStatut($dossier['statutSoutenance']) ?>">
-                                    <?= escape(historiqueLibelleStatut($dossier['statutSoutenance'])) ?>
-                                </span>
-                            </li>
-                        <?php endif; ?>
                     </ul>
                 </div>
 
