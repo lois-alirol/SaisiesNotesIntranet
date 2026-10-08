@@ -257,10 +257,12 @@ class GrilleEval {
         //REQUETE POUR SAUVEGARDER CHAQUE NOTE DE CRITERE        
         $reqCritere = "INSERT INTO $tableNotes ($cleEval, idCritere, noteCritere) VALUES (:idEval, :idCritere, :noteCritere) ON DUPLICATE KEY UPDATE noteCritere = :noteCritere";
         
+
         $stmtCritere = $this->pdo->prepare($reqCritere);
         $stmtCritere->bindParam(":idEval", $idEval);
         $stmtCritere->bindParam(":idCritere", $currentIdCritere);
         $stmtCritere->bindParam(":noteCritere", $currentNote);
+
 
         $noteTotale = 0;
 
@@ -268,19 +270,28 @@ class GrilleEval {
             $currentIdCritere = $idCritere;
             $currentNote = $n;
             $noteTotale += $currentNote;
-
-            $stmtCritere->execute();
+            try {
+                $stmtCritere->execute();
+            }
+            catch (PDOException $e){
+                return $e->getMessage();
+            }
         }
         
         //REQUETE POUR METTRE A JOUE LA NOTE GLOBALE & LE STATUT
         $reqEval = "UPDATE $tableEval SET $colNote = :noteTotale, Statut = :statut WHERE $cleEval = :idEval";
         
+
         $stmtEval = $this->pdo->prepare($reqEval);
         $stmtEval->bindParam(":noteTotale", $noteTotale);
         $stmtEval->bindParam(":statut", $statut);
         $stmtEval->bindParam(":idEval", $idEval);
-
-        return $stmtEval->execute();
+        try{
+            return $stmtEval->execute();
+        }
+        catch (PDOException $e){
+            return $e->getMessage();
+        }
     }
 
     // public function updateNotes($data, $idEvalAnglais) {

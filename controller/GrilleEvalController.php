@@ -19,11 +19,14 @@ class GrilleEvalController {
             $notes = $_POST["notes"]; //IdCritere => VALUER CHOISIE
 
             //SI ENREGISTRE, SINON VALIDE
-            if ($_POST["save"]){
-                $this->grilleEvalModel->save($idEval, $cours, $typeEnseignant, $notes, "SAISIE");
-            }else {
-                $this->grilleEvalModel->save($idEval, $cours, $typeEnseignant, $notes, "VALIDEE");
+            if (in_array("save", $_POST)){
+                $result = $this->grilleEvalModel->save($idEval, $cours, $typeEnseignant, $notes, "SAISIE");
             }
+            else {
+                $result = $this->grilleEvalModel->save($idEval, $cours, $typeEnseignant, $notes, "VALIDEE");
+            }
+
+            //RESULT SERA VERIFIE DANS LE VUE
             
         }
 

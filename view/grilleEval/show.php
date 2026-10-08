@@ -38,7 +38,7 @@
                                     <input type="range" name="notes[<?= $c["IdCritere"] ?>]" id="slider-<?= $c["IdCritere"] ?>" value="<?= $c["noteCritere"]?>" min="0" max="<?= $c["ValeurMaxCritereEVal"] ?>" step="0.1" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?> />
                                 </div>
                                 <div>
-                                    <span id="value-<?= $c["IdCritere"] ?>"></span>/<span class="max-value" id="max-value-<?= $c["IdCritere"] ?>" disabled></span>
+                                    <span id="value-<?= $c["IdCritere"] ?>"></span> / <span class="max-value" id="max-value-<?= $c["IdCritere"] ?>" disabled></span>
                                 </div>
                             </td>
                         </tr>
@@ -70,7 +70,7 @@
 
                     noteFinalCalcul = 0
                     tabNotes.forEach((el) => noteFinalCalcul += el);
-                    noteFinale.textContent = "Note finale : " + noteFinalCalcul + "/" + <?= $noteMaximale ?>;
+                    noteFinale.textContent = "Note finale : " + noteFinalCalcul + " / " + <?= $noteMaximale ?>;
                 };
 
             <?php endforeach; ?>
@@ -80,6 +80,15 @@
             <h2>Feedback :</h2>
             <textarea name="feedback"><?= $feedback ?></textarea>
         </div>
+
+        <?php
+            
+        //TRIGGER (RESULT DIFFERENT DE 1 == ERREUR)
+        if ($result != 1) {
+            include "view/grilleEval/error.php";
+        }
+            
+        ?>
 
         <div class="save-bar">
             <button type="submit" name="save" value="save" <?php if ($resultatEval["Statut"] === "BLOQUEE") echo "disabled" ?>>Enregistrer</button>
