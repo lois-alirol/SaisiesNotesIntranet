@@ -17,9 +17,9 @@
                     <span class="line line3"></span>
                 </div>
                 <ul class="menu-items">
-                    <li onclick="window.location.href='/historique'"><a href="/historique">Etudiants</a></li>
-                    <li onclick="window.location.href='/historique'"><a href="/planning">Planning</a></li>
-                    <li onclick="window.location.href='/historique'"><a href="/logout">Se déconnecter</a></li>
+                    <li onclick="window.location.href='/etudiant'"><a href="/etudiant">Etudiants</a></li>
+                    <li onclick="window.location.href='/planning'"><a href="/planning">Planning</a></li>
+                    <li onclick="window.location.href='/logout'"><a href="/logout">Se déconnecter</a></li>
                 </ul>
             </div>
 
