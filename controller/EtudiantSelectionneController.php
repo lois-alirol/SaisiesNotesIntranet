@@ -3,6 +3,7 @@
 require_once 'model/Etudiant.php';
 
 class EtudiantSelectionneController {
+    
     public function afficherPage() {
         $idEtudiant = $_GET["etudiant"] ?? null;
         $idEnseignant = EnseignantSession::getData()["id"];

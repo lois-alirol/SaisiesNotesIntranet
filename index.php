@@ -5,12 +5,14 @@ require_once __DIR__ . '/controller/AuthController.php';
 require_once __DIR__ . '/controller/GrilleEvalController.php';
 require_once __DIR__ . '/controller/PlanningController.php';
 require_once __DIR__ . '/controller/EtudiantSelectionneController.php';
+require_once __DIR__ . '/controller/ListEtudiantController.php';
 session_start();
 
 $authController = new AuthController();
 $grilleEvalController = new GrilleEvalController();
 $planningController = new planningController();
 $historiqueController = new EtudiantSelectionneController();
+$listEtudiantController = new ListEtuController();
 
 $url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 $file = __DIR__ . $url;
@@ -39,6 +41,10 @@ switch ($url) {
     }
     case "/planning": {
         $planningController->Planning();
+        break;
+    }
+    case "/etudiant": {
+        $listEtudiantController->afficherPage();
         break;
     }
     case "/historique": {
