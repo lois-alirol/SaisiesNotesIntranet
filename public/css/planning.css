@@ -277,9 +277,19 @@ label[for="dateSlct"] {
     margin-top: 15px;
 }
 
+a {
+    color: rgb(0, 22, 165);
+    text-decoration: none;
+}
+
+a:hover{
+    color: rgb(0, 34, 255);
+    text-decoration: underline;
+}
+
 /*Responsive*/
-@media (max-width: 1300px) {
+@media (max-width: 1800px) {
     .planning{
-    width: 90%;
+    width: 70%;
     }
 }
