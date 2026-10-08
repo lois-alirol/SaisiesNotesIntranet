@@ -82,10 +82,12 @@
         </div>
 
         <?php
-            
-        //TRIGGER (RESULT DIFFERENT DE 1 == ERREUR)
-        if ($result != 1) {
-            include "view/grilleEval/error.php";
+        
+        if (isset($result)){
+            //TRIGGER (RESULT DIFFERENT DE 1 == ERREUR)
+            if ($result != 1) {
+                include "view/grilleEval/error.php";
+            }
         }
             
         ?>
