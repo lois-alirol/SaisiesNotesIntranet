@@ -262,6 +262,8 @@ label[for="dateSlct"] {
     font-weight: 500;
     background-color: #e5f5eb; 
     padding: 5px;
+    border-radius: 5px;
+    margin-top: 25px;
 }
 
 #legende2 {
@@ -271,6 +273,8 @@ label[for="dateSlct"] {
     font-weight: 500;
     background-color: #e5edf5;
     padding: 5px;
+    border-radius: 5px;
+    margin-top: 15px;
 }
 
 /*Responsive*/

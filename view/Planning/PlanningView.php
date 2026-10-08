@@ -107,7 +107,8 @@ sort($salles);
                                     ?>
                                     <div class="passage">
                                         <strong>
-                                            <?= htmlspecialchars($planning['eleve'].' '.$niveau) ?>
+                                            <a href="/historique?etudiant=<?php echo $planning['idEtudiant']; ?>"><?= htmlspecialchars($planning['eleve'])?></a><br>
+                                            <?= htmlspecialchars(' '.$niveau) ?>
                                         </strong>
                                         <br>
                                         <?= htmlspecialchars($planning['professeur_1']) ?>
