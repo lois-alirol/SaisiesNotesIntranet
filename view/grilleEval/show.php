@@ -38,7 +38,7 @@
                                     <input type="range" name="notes[<?= $c["IdCritere"] ?>]" id="slider-<?= $c["IdCritere"] ?>" value="<?= $c["noteCritere"]?>" min="0" max="<?= $c["ValeurMaxCritereEVal"] ?>" step="0.1" <?php if ($resultatEval["Statut"] == "BLOQUEE") echo "disabled" ?> />
                                 </div>
                                 <div>
-                                    <span id="value-<?= $c["IdCritere"] ?>"></span> / <span class="max-value" id="max-value-<?= $c["IdCritere"] ?>" disabled></span>
+                                    <span class="note-value" id="value-<?= $c["IdCritere"] ?>"></span> / <span id="max-value-<?= $c["IdCritere"] ?>" disabled></span>
                                 </div>
                             </td>
                         </tr>
@@ -68,12 +68,23 @@
                     output<?= $c["IdCritere"] ?>.innerHTML = this.value;
                     tabNotes[<?= $c["IdCritere"] - 1?>] = Number(this.value);
 
+                    updateColor(slider<?= $c["IdCritere"] ?>, <?= $c["ValeurMaxCritereEVal"]?>);
+
                     noteFinalCalcul = 0
                     tabNotes.forEach((el) => noteFinalCalcul += el);
                     noteFinale.textContent = "Note finale : " + noteFinalCalcul + " / " + <?= $noteMaximale ?>;
                 };
 
             <?php endforeach; ?>
+
+            function updateColor(slider, max){
+                colorMin = "#ffdd00";
+                colorMax = "#79c916";
+
+                // slider.style.mozRangeThumb. = colorMin; obtenir le selecteur et changer sa propriété background
+
+                console.log(0 + " < " + slider.value + " < " + max);
+            }
         </script>
 
         <div class="feedback-box">
