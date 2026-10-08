@@ -219,6 +219,7 @@ sort($salles);
                                         endif;?>
                                         <div class="passage">
                                             <strong>
+                                                <a href="/historique?etudiant=<?php echo $planning['idEtudiant']; ?>"><?= htmlspecialchars($planning['eleve'])?></a><br>
                                                 <?= htmlspecialchars($planning['eleve'].' '.$niveau) ?>
                                             </strong>
                                             <br>
