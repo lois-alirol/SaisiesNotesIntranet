@@ -4,6 +4,7 @@
 <head>
     <title>SAISIES NOTES INTRANET</title>
     <link rel="stylesheet" type="text/css" href="public/css/style.css">
+    <meta charset="UTF-8">
 </head>
 
 <body>
@@ -17,7 +18,7 @@
                     <span class="line line3"></span>
                 </div>
                 <ul class="menu-items">
-                    <li onclick="window.location.href='/etudiant'"><a href="/etudiant">Etudiants</a></li>
+                    <li onclick="window.location.href='/'"><a href="/">Étudiants</a></li>
                     <li onclick="window.location.href='/planning'"><a href="/planning">Planning</a></li>
                     <li onclick="window.location.href='/logout'"><a href="/logout">Se déconnecter</a></li>
                 </ul>

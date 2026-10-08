@@ -217,27 +217,31 @@ class GrilleEval {
     }
 
     //SUPPR :  il faut : changer le statut en validé OU enregistré selon la validation ET update chaque notes. 
-    public function save($idEval, $cours, $typeEnseignant, $notes, $statut) {
+    public function save($idEval, $cours, $typeEnseignant, $notes, $feedback, $statut) {
         $tableNotes = "";
         $tableEval = "";
         $cleEval = "";
         $colNote = "note";
+        $colCommentaire = "";
 
         switch ($cours) {
             case "PORTFOLIO":
                 $tableNotes = "lescriteresnotesportfolio";
                 $tableEval = "evalportfolio";
                 $cleEval = "IdEvalPortfolio";
+                $colCommentaire = "commentaireJury";
                 break;
             case "RAPPORT":
                 $tableNotes = "lescriteresnotesrapport";
                 $tableEval = "evalrapport";
                 $cleEval = "IdEvalRapport";
+                $colCommentaire = "commentaireJury";
                 break;
             case "ANGLAIS":
                 $tableNotes = "lescriteresnotesanglais";
                 $tableEval = "evalanglais";
                 $cleEval = "IdEvalAnglais";
+                $colCommentaire = "commentaireJury";
                 break;
             case "SOUTENANCE":
                 if ($typeEnseignant === "ENSSECOND") {
@@ -245,11 +249,13 @@ class GrilleEval {
                     $tableEval  = "evalsoutenanceenssecond";
                     $cleEval = "IdEvalSoutenanceEnsSecond";
                     $colNote = "noteEnsSecond";
+                    $colCommentaire = "commentaireEnsSecond";
                 } else {
                     $tableNotes = "lescriteresnotessoutenanceenstut";
                     $tableEval = "evalsoutenanceenstuteur";
                     $cleEval = "IdEvalSoutenanceEnsTut";
                     $colNote = "noteEnsTut";
+                    $colCommentaire = "commentaireEnsTuteur";
                 }
                 break;
         }
@@ -279,11 +285,12 @@ class GrilleEval {
         }
         
         //REQUETE POUR METTRE A JOUE LA NOTE GLOBALE & LE STATUT
-        $reqEval = "UPDATE $tableEval SET $colNote = :noteTotale, Statut = :statut WHERE $cleEval = :idEval";
+        $reqEval = "UPDATE $tableEval SET $colNote = :noteTotale, $colCommentaire = :commentaire, Statut = :statut WHERE $cleEval = :idEval";
         
 
         $stmtEval = $this->pdo->prepare($reqEval);
         $stmtEval->bindParam(":noteTotale", $noteTotale);
+        $stmtEval->bindParam(":commentaire", $feedback);
         $stmtEval->bindParam(":statut", $statut);
         $stmtEval->bindParam(":idEval", $idEval);
         try{

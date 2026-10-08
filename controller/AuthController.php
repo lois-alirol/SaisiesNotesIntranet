@@ -56,7 +56,7 @@ class AuthController {
         $_SESSION["prenom"] = $teacher["prenom"];
         $_SESSION["mail"] = $teacher["mail"];
 
-        header("Location: /etudiant");
+        header("Location: /");
     }
 
     public function logout(): void {

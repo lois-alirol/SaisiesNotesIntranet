@@ -4,8 +4,8 @@
 $host = "localhost";
 $port = "3306";
 $dbName = "stagebdmerge";
-$username = "root";
-$password = "";
+$username = "iut";
+$password = "123456";
 
 try {
     $pdo = new PDO(

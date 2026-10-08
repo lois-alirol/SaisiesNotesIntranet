@@ -43,7 +43,7 @@ switch ($url) {
         $planningController->Planning();
         break;
     }
-    case "/etudiant": {
+    case "/": {
         $listEtudiantController->afficherPage();
         break;
     }

@@ -10,7 +10,7 @@
             <h1 class="error-code">404</h1>
             <h2 class="error-message">Resource introuvable</h2>
             <p>Il semblerait que la page cherchée n'existe pas... Vérifiez l'url et réessayez!</p>
-            <a href="/etudiant" class="action-button">Retour à l'accueil</a>
+            <a href="/" class="action-button">Retour à l'accueil</a>
         </div>
     </body>
 </html>
