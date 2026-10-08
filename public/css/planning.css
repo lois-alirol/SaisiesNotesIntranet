@@ -113,6 +113,7 @@ h2 {
 #dateSlct,
 #anglaisToggle {
     font-family: Arial, Helvetica, sans-serif;
+    margin-top: 5px;
 }
 
 label[for="dateSlct"] {
