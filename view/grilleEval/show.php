@@ -81,9 +81,9 @@
                 colorMin = "#ffdd00";
                 colorMax = "#79c916";
 
-                // slider.style.mozRangeThumb. = colorMin; obtenir le selecteur et changer sa propriété background
-
-                console.log(0 + " < " + slider.value + " < " + max);
+                // slider.style.backgroundColor = colorMin; //obtenir le selecteur et changer sa propriété background
+                // console.log(slider["-moz-range-thumb"]);
+                //console.log(0 + " < " + slider.value + " < " + max);
             }
         </script>
 
