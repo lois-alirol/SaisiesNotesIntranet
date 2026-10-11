@@ -74,19 +74,19 @@ button:disabled{
 
 .info-bar{
   width: 100%;
-  border-bottom: 1px solid #506168;
+  border: 1px solid #d7e6ed;;
+  border-radius: 4px;
   background-color: #e9f0f5;
+  padding: 0.5em;
   margin-bottom: 1em;
 }
 
 .info-bar > div{
-  padding: 0.5em;
   display: flex;
   justify-content: space-between;
 }
 
 .info-bar > * p{
-  margin-bottom: 0.25em;
   font-weight: 600;
   color: #2E6B80;
 }
@@ -99,7 +99,7 @@ button:disabled{
 }
 
 .content{
-  width: 1200px;
+  max-width: 1200px;
   gap: 1em;
   display: flex;
   flex-direction: column;
@@ -110,6 +110,7 @@ main{
   flex-direction: column;
   align-items: center;
   height: 100%;
+  justify-content: center;
 }
 
 h2{
@@ -122,63 +123,6 @@ h2{
 .slider-box > div{
   display: flex;
 }
-
-/*https://www.w3schools.com/howto/howto_js_rangeslider.asp*/
-
-/*
-
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 15px;
-  outline: none; 
-}
-
-.slider-box > div > input:hover {
-  opacity: 1;
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px; 
-  height: 15px; 
-  background: #2E6B80;
-  border-radius: 50px;
-  cursor: pointer;
-}
-
-input[type="range"]::-moz-range-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px; 
-  height: 15px; 
-  background: #2E6B80;
-  border-radius: 50px;
-  cursor: pointer;
-}
-
-CHROME etc...
-input[type="range"]::-webkit-slider-runnable-track {
-  background: #c9c9c9;
-  height: 0.5rem;
-}
-
-FIREFOX
-input[type="range"]::-moz-range-track {
-  background: #c9c9c9;
-  height: 0.5rem;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 15px;
-  height: 15px;
-  background: #04AA6D;
-  border: none;
-  border-radius: 0;
-  cursor: pointer; 
-} */
 
 .div-error{
   width: 100%;
@@ -223,7 +167,7 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
    appearance: none;
 
-   background-color: #3d9e2e;
+   background-color: var(--thumb-color, #3d9e2e);
    border-radius: 50px;
    height: 1rem;
    width: 1rem;
@@ -248,7 +192,7 @@ input[type="range"]::-moz-range-thumb {
    border: none; 
    border-radius: 0;
 
-   background-color: #3d9e2e;
+   background-color: var(--thumb-color, #3d9e2e);
    border-radius: 50px;
    height: 1rem;
    width: 1rem;
